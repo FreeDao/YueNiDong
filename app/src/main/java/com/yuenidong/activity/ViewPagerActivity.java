@@ -52,6 +52,7 @@ public class ViewPagerActivity extends Activity implements OnClickListener {
         list.add(view_four);
         ViewPagerAdapter adapter = new ViewPagerAdapter(this, list);
         viewPager.setAdapter(adapter);
+
     }
 
     @Override

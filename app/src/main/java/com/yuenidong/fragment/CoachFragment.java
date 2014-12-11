@@ -1,11 +1,14 @@
 package com.yuenidong.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
+import com.yuenidong.activity.CoachInfoActivity;
 import com.yuenidong.activity.R;
 import com.yuenidong.adapter.CoachAdapter;
 import com.yuenidong.bean.CoachEntity;
@@ -17,7 +20,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class CoachFragment extends Fragment {
+public class CoachFragment extends Fragment implements AdapterView.OnItemClickListener {
     private List<CoachEntity> list;
     @InjectView(R.id.listview)
     AutoListView listView;
@@ -50,7 +53,14 @@ public class CoachFragment extends Fragment {
         this.list = new ArrayList<CoachEntity>();
         CoachAdapter adapter = new CoachAdapter(getActivity(), list);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(this);
         return view;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent = new Intent(getActivity(), CoachInfoActivity.class);
+        startActivity(intent);
+    }
 }

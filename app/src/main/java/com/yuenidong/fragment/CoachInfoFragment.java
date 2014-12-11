@@ -42,6 +42,7 @@ public class CoachInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_coach_info, container, false);
         ButterKnife.inject(this, view);
+
         return view;
     }
 

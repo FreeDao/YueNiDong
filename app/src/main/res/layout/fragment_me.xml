@@ -27,13 +27,13 @@
                 android:layout_height="107dp"
                 android:layout_below="@id/btn_setting"
                 android:layout_centerHorizontal="true"
-                android:background="@android:color/transparent" />
+                android:background="@drawable/ic_outside" />
 
             <com.yuenidong.widget.CircleImageView
                 android:id="@+id/iv_image"
-                android:layout_width="107dp"
-                android:layout_height="107dp"
-                android:layout_below="@id/btn_setting"
+                android:layout_width="101dp"
+                android:layout_height="101dp"
+                android:layout_marginTop="59dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/ic_image" />
 

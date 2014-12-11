@@ -19,7 +19,7 @@
                 android:layout_height="107dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="56dp"
-                android:background="@android:color/white" />
+                android:background="@drawable/ic_outside" />
 
             <com.yuenidong.widget.CircleImageView
                 android:id="@+id/iv_image"
