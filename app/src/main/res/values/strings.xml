@@ -12,5 +12,7 @@
     <string name="title_activity_first">FirstActivity</string>
     <string name="title_activity_sina_oauth">SinaOauthActivity</string>
     <string name="title_activity_wx_oauth">WxOauthActivity</string>
+    <string name="title_activity_friend_info">FriendInfoActivity</string>
+    <string name="title_activity_coach_info">CoachInfoActivity</string>
 
 </resources>

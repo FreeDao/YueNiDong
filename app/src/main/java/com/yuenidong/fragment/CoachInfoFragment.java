@@ -12,16 +12,21 @@ import com.yuenidong.activity.R;
 
 import butterknife.ButterKnife;
 
-public class MeFragment extends Fragment {
-    public static MeFragment newInstance() {
-        MeFragment fragment = new MeFragment();
+/**
+ * 石岩 教练主页
+ */
+public class CoachInfoFragment extends Fragment {
+
+    public static CoachInfoFragment newInstance() {
+        CoachInfoFragment fragment = new CoachInfoFragment();
 //        Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        fragment.setArguments(args);
         return fragment;
     }
 
-    public MeFragment() {
+    public CoachInfoFragment() {
+        // Required empty public constructor
     }
 
     @Override
@@ -35,9 +40,10 @@ public class MeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_friend_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_coach_info, container, false);
         ButterKnife.inject(this, view);
         return view;
     }
+
 
 }

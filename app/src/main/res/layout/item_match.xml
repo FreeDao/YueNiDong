@@ -202,7 +202,6 @@
                 android:layout_alignLeft="@id/rl_six"
                 android:layout_alignParentBottom="true"
                 android:layout_below="@id/rl_six"
-                android:layout_marginBottom="14dp"
                 android:layout_marginTop="8dp">
 
                 <RelativeLayout

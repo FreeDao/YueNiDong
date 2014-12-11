@@ -1,12 +1,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
     <RelativeLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:background="@color/layout">
 
         <RelativeLayout
@@ -15,26 +13,20 @@
             android:layout_height="320dp"
             android:background="@drawable/pic_lowpoly">
 
-            <Button
-                android:id="@+id/btn_setting"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/button_setting" />
 
             <com.yuenidong.widget.CircleImageView
                 android:layout_width="107dp"
                 android:layout_height="107dp"
-                android:layout_below="@id/btn_setting"
                 android:layout_centerHorizontal="true"
-                android:background="@android:color/transparent" />
+                android:layout_marginTop="56dp"
+                android:background="@android:color/white" />
 
             <com.yuenidong.widget.CircleImageView
                 android:id="@+id/iv_image"
-                android:layout_width="107dp"
-                android:layout_height="107dp"
-                android:layout_below="@id/btn_setting"
+                android:layout_width="101dp"
+                android:layout_height="101dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="59dp"
                 android:src="@drawable/ic_image" />
 
             <RelativeLayout
@@ -248,11 +240,11 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_part2"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@id/rl_one"
-            android:layout_marginBottom="8dp">
-
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_one">
+            <!--个性签名-->
             <RelativeLayout
                 android:id="@+id/rl_two"
                 android:layout_width="fill_parent"
@@ -280,10 +272,10 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="16dp"
                     android:maxLines="2"
-                    android:text="快憋死我了，我要上厕所。厕所里面还蹲着一个人，你让我情何以堪，额！"
+                    android:text="快憋死我了，我要上厕所。厕所里面还蹲着一个人，你让我情何以堪，
+额！"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
-
 
             </RelativeLayout>
 
@@ -294,115 +286,12 @@
                 android:layout_below="@id/rl_two"
                 android:background="@color/grayblack" />
 
+            <!--我的活动-->
             <RelativeLayout
                 android:id="@+id/rl_three"
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
                 android:layout_below="@id/view_one">
-
-                <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/button_me" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="16dp"
-                    android:text="我的订单"
-                    android:textColor="@color/grayblack"
-                    android:textSize="16dp"
-
-                    />
-
-                <ImageView
-                    android:layout_width="6dp"
-                    android:layout_height="10dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_next" />
-
-            </RelativeLayout>
-
-            <View
-                android:id="@+id/view_two"
-                android:layout_width="fill_parent"
-                android:layout_height="0.0dp"
-                android:layout_below="@id/rl_three"
-                android:background="@color/grayblack" />
-            <!--我的标签-->
-            <RelativeLayout
-                android:id="@+id/rl_four"
-                android:layout_width="fill_parent"
-                android:layout_height="48dp"
-                android:layout_below="@id/view_two">
-
-                <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/button_me" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="16dp"
-                    android:text="我的标签"
-                    android:textColor="@color/grayblack"
-                    android:textSize="16dp"
-
-                    />
-
-                <ImageView
-                    android:id="@+id/iv_billiards"
-                    android:layout_width="29dp"
-                    android:layout_height="13dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="96dp"
-                    android:src="@drawable/ic_billiards" />
-
-                <ImageView
-                    android:id="@+id/iv_basketball"
-                    android:layout_width="29dp"
-                    android:layout_height="13dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@id/iv_billiards"
-                    android:src="@drawable/ic_basketball" />
-
-                <ImageView
-                    android:id="@+id/badminton"
-                    android:layout_width="40dp"
-                    android:layout_height="13dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@id/iv_basketball"
-                    android:src="@drawable/ic_badminton" />
-
-                <ImageView
-                    android:layout_width="6dp"
-                    android:layout_height="10dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"
-                    android:background="@drawable/ic_next" />
-
-            </RelativeLayout>
-
-            <View
-                android:id="@+id/view_three"
-                android:layout_width="fill_parent"
-                android:layout_height="0.0dp"
-                android:layout_below="@id/rl_four"
-                android:background="@color/grayblack" />
-
-            <RelativeLayout
-                android:id="@+id/rl_five"
-                android:layout_width="fill_parent"
-                android:layout_height="48dp"
-                android:layout_below="@id/view_three">
 
                 <Button
                     android:layout_width="fill_parent"
@@ -431,17 +320,17 @@
             </RelativeLayout>
 
             <View
-                android:id="@+id/view_four"
+                android:id="@+id/view_two"
                 android:layout_width="fill_parent"
                 android:layout_height="0.0dp"
-                android:layout_below="@id/rl_five"
+                android:layout_below="@id/rl_three"
                 android:background="@color/grayblack" />
-
+            <!--我的收藏-->
             <RelativeLayout
-                android:id="@+id/rl_six"
+                android:id="@+id/rl_four"
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
-                android:layout_below="@id/view_four">
+                android:layout_below="@id/view_two">
 
                 <Button
                     android:layout_width="fill_parent"
@@ -470,17 +359,17 @@
             </RelativeLayout>
 
             <View
-                android:id="@+id/view_five"
+                android:id="@+id/view_three"
                 android:layout_width="fill_parent"
                 android:layout_height="0.0dp"
-                android:layout_below="@id/rl_six"
+                android:layout_below="@id/rl_four"
                 android:background="@color/grayblack" />
-
+            <!--我的签到-->
             <RelativeLayout
-                android:id="@+id/rl_seven"
+                android:id="@+id/rl_five"
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
-                android:layout_below="@id/view_five">
+                android:layout_below="@id/view_three">
 
                 <Button
                     android:layout_width="fill_parent"
@@ -509,45 +398,122 @@
             </RelativeLayout>
 
             <View
-                android:id="@+id/view_six"
+                android:id="@+id/view_four"
                 android:layout_width="fill_parent"
                 android:layout_height="0.0dp"
-                android:layout_below="@id/rl_seven"
+                android:layout_below="@id/rl_five"
                 android:background="@color/grayblack" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="53dp"
+            android:layout_below="@id/rl_part2"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/bg_transparent"
+            android:orientation="horizontal">
 
             <RelativeLayout
-                android:id="@+id/rl_eight"
-                android:layout_width="fill_parent"
-                android:layout_height="48dp"
-                android:layout_below="@id/view_six">
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
 
-                <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/button_me" />
+                <!--<ImageButton-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:background="@drawable/button_login" />-->
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="16dp"
-                    android:text="黑名单"
-                    android:textColor="@color/grayblack"
-                    android:textSize="16dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="13dp"
+                    android:gravity="center_vertical">
 
-                    />
+                    <ImageButton
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/button_attention" />
 
-                <ImageView
-                    android:layout_width="6dp"
-                    android:layout_height="10dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_next" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:text="关注"
+                        android:textColor="@color/grayblack"
+                        android:textSize="16dp" />
+                </LinearLayout>
 
             </RelativeLayout>
 
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+                <!--<ImageButton-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:background="@drawable/button_login" />-->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="13dp"
+                    android:gravity="center_vertical">
+
+                    <ImageButton
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/button_talk" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:text="对话"
+                        android:textColor="@color/grayblack"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+                <!--<ImageButton-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:background="@drawable/button_login" />-->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="13dp"
+                    android:gravity="center_vertical">
+
+                    <ImageButton
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/button_defriend" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:text="拉黑"
+                        android:textColor="@color/grayblack"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
     </RelativeLayout>
 </ScrollView>
