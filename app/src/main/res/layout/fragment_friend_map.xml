@@ -1,0 +1,30 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yuenidong.fragment.FriendMapFragment">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.yuenidong.widget.HorizontialListView
+        android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="85dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/bg_transparent"></com.yuenidong.widget.HorizontialListView>
+
+    <com.yuenidong.widget.ZoomControlView
+        android:id="@+id/ZoomControlView"
+        android:layout_width="33dp"
+        android:layout_height="100dp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="101dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/bg_transparent"></com.yuenidong.widget.ZoomControlView>
+</FrameLayout>

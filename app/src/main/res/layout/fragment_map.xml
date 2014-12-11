@@ -1,0 +1,128 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/layout_container"
+        layout="@layout/actionbar"></include>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="@color/layout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_friend"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/friend"
+                android:textColor="@color/view"
+                android:textSize="16dp" />
+
+            <View
+                android:id="@+id/view_freiend_select"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/green"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/view_freiend"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/grayblack"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_coach"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_coach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/coach"
+                android:textColor="@color/view"
+                android:textSize="16dp" />
+
+            <View
+                android:id="@+id/view_coach_select"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/green"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/view_coach"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/grayblack"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_venues"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_venues"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/venues"
+                android:textColor="@color/view"
+                android:textSize="16dp" />
+
+            <View
+                android:id="@+id/view_venues_select"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/green"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/view_venues"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/grayblack"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="4dp"
+        android:background="@color/layout"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_fragment_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/layout" />
+</LinearLayout>

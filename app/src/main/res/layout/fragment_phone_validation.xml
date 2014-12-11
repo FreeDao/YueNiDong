@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="36dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_validation"
+            android:layout_width="83dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_select"
+            android:text="@string/getvalidation"
+            android:textColor="@color/white"
+            android:textSize="@dimen/small_text" />
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toLeftOf="@id/btn_validation">
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="0dp" />
+
+            <EditText
+                android:id="@+id/et_phone"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/text_line"
+                android:hint="@string/inputphone"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:id="@+id/iv_phone"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="6dp"
+                android:background="@drawable/ic_telephone" />
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="36dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="12dp">
+
+        <EditText
+            android:id="@+id/et_validation"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/text_line"
+            android:hint="@string/inputvalidation"
+            android:inputType="number"
+            android:maxLength="6"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:id="@+id/iv_validationCode"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="6dp"
+            android:background="@drawable/ic_validation" />
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btn_nextStep"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="55dp"
+        android:background="@drawable/button_select"
+        android:text="@string/nextstep"
+        android:textColor="@color/white"
+        android:textSize="@dimen/medium_text" />
+
+</LinearLayout>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="85dp"
+   >
+
+    <LinearLayout
+        android:id="@+id/ll_one"
+        android:layout_width="8dp"
+        android:layout_height="fill_parent"
+        android:background="@color/green"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text=" "
+            />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="85dp"
+        android:layout_toLeftOf="@id/ll_one"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="85dp"
+            android:layout_height="85dp">
+
+            <com.yuenidong.widget.CircleImageView
+                android:id="@+id/iv_image"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_image" />
+            />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="53dp"
+                android:layout_marginTop="16dp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_one"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="美女"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:id="@+id/iv_sex"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toRightOf="@id/tv_name"
+                        android:src="@drawable/ic_woman" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="1dp"
+                        android:text="0.22km"
+                        android:textColor="@color/view"
+                        android:textSize="13dp" />
+
+                </RelativeLayout>
+
+                <!--第三层-->
+                <TextView
+                    android:id="@+id/tv_one"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="快憋死我了，我要上厕所。美工在厕所里面不知道在干什么"
+                    android:textColor="@color/view"
+                    android:textSize="@dimen/small_text" />
+
+                <!--第二层数据-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@id/tv_one"
+                    android:layout_below="@id/rl_one">
+
+                    <ImageView
+                        android:id="@+id/iv_hobby_one"
+                        android:layout_width="29dp"
+                        android:layout_height="13dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_basketball" />
+
+                    <ImageView
+                        android:id="@+id/iv_hobby_two"
+                        android:layout_width="29dp"
+                        android:layout_height="13dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/iv_hobby_one"
+                        android:background="@drawable/ic_billiards" />
+
+                    <ImageView
+                        android:id="@+id/iv_hobby_three"
+                        android:layout_width="40dp"
+                        android:layout_height="13dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/iv_hobby_two"
+                        android:background="@drawable/ic_badminton" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/view" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

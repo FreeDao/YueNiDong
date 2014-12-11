@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:background="@drawable/button_white"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/rl_one"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/label_billiards" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="37dp"
+                android:ellipsize="end"
+                android:maxLength="16"
+                android:text="我想打台球，求大神带！"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:padding="4dp"
+                android:background="@drawable/label_jelly"
+                android:gravity="center"
+                android:text="奖励果冻9999"
+                android:textColor="@color/white"
+                android:textSize="13dp" />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view_two"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/rl_one"
+            android:layout_marginLeft="37dp"
+            android:background="@color/grayblack" />
+
+        <RelativeLayout
+            android:id="@+id/rl_two"
+            android:layout_width="fill_parent"
+            android:layout_height="36dp"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_heat"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginLeft="32dp"
+                        android:src="@drawable/ic_heat" />
+
+                    <TextView
+                        android:id="@+id/tv_heat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:layout_toRightOf="@id/iv_heat"
+                        android:text="热度"
+                        android:textColor="@color/grayblack"
+                        android:textSize="13dp" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_praise"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_praise"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginLeft="32dp"
+                        android:src="@drawable/ic_praise" />
+
+                    <TextView
+                        android:id="@+id/tv_praise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:layout_toRightOf="@id/iv_praise"
+                        android:text="点赞"
+                        android:textColor="@color/grayblack"
+                        android:textSize="13dp" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_comment"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginLeft="32dp"
+                        android:src="@drawable/ic_comment" />
+
+                    <TextView
+                        android:id="@+id/tv_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:layout_toRightOf="@id/iv_comment"
+                        android:text="评论"
+                        android:textColor="@color/grayblack"
+                        android:textSize="13dp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_above="@id/rl_two"
+            android:background="@color/grayblack" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@id/view"
+            android:layout_below="@id/view_two">
+
+            <com.yuenidong.widget.CircleImageView
+                android:id="@+id/iv_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_image" />
+
+            <RelativeLayout
+                android:id="@+id/rl_six"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/iv_image"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/iv_image"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="美女"
+                    android:textColor="@color/grayblack"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="6dp"
+                    android:layout_toRightOf="@id/tv_name"
+                    android:src="@drawable/ic_woman" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/rl_six"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/rl_six"
+                android:layout_marginBottom="14dp"
+                android:layout_marginTop="8dp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_seven"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="地点：光谷/世界城"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="8dp"
+                        android:text="0.22km"
+                        android:textColor="@color/grayblack"
+                        android:textSize="13dp" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_seven"
+                    android:text="时间:2014年12月11日20:30"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_time"
+                    android:text="人数:15"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>

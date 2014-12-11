@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="actionbar_height">55dp</dimen>
+    <dimen name="actionbar_left_width">23dp</dimen>
+    <dimen name="actionbar_left_height">23dp</dimen>
+    <!-- text_size -->
+    <dimen name="micro_text">12dp</dimen>
+    <dimen name="small_text">14dp</dimen>
+    <dimen name="medium_text">18dp</dimen>
+    <dimen name="large_text">20dp</dimen>
+    <dimen name="tab_icon_sixe">36dp</dimen>
+    <dimen name="tab_height">60dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+</resources>
