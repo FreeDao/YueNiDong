@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yuenidong.fragment.MatchPlaceFragment">
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="@null"
+        android:hint="@string/address"
+        android:textColor="@color/green"
+        android:textColorHint="@color/green"
+        android:completionThreshold="1"
+        android:textSize="18dp" />
+
+    <View
+        android:id="@+id/view_one"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/autoCompleteTextView"
+        android:background="@color/grayblack"></View>
+</RelativeLayout>

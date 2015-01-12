@@ -3,7 +3,7 @@
     android:id="@+id/layout_actionbar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/actionbar_height"
-    android:background="@color/green">
+    android:background="@drawable/actionbar_bg">
 
     <ImageView
         android:id="@+id/actionbar_left"
@@ -39,12 +39,19 @@
 
     <Button
         android:id="@+id/actionbar_rightbutton"
-        android:layout_width="48dp"
+        android:layout_width="56dp"
         android:layout_height="fill_parent"
         android:layout_alignParentRight="true"
-        android:background="@drawable/button_map"
         android:textColor="@color/white"
         android:textSize="14dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/actionbar_rightbutton2"
+        android:layout_width="56dp"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="56dp"
         android:visibility="gone" />
 
 </RelativeLayout>

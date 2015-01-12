@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.igexin.sdk.PushManager;
+import com.yuenidong.app.DsncLog;
 import com.yuenidong.common.AppData;
 import com.yuenidong.fragment.SetPasswordFragment;
 import com.yuenidong.fragment.SinaOauthFragment;
@@ -20,7 +22,8 @@ public class SinaOauthActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         showActionBarText(AppData.getString(R.string.weibologin));
-
+//        String ClientID = PushManager.getInstance().getClientid(AppData.getContext());
+//        DsncLog.e("ClientID",ClientID);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Fragment fragment = SinaOauthFragment.newInstance();

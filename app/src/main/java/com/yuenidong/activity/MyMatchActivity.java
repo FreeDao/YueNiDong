@@ -1,0 +1,31 @@
+package com.yuenidong.activity;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
+import com.yuenidong.common.AppData;
+import com.yuenidong.fragment.MyMatchFragment;
+import com.yuenidong.fragment.MyOrderFragment;
+
+/**
+ * 我的活动
+ */
+public class MyMatchActivity extends BaseActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        showActionBarText(AppData.getString(R.string.mysport));
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment fragment = MyMatchFragment.newInstance();
+        fragmentTransaction.replace(R.id.layout_container, fragment);
+        fragmentTransaction.commit();
+
+    }
+
+}

@@ -18,384 +18,291 @@ import android.widget.ListView;
 import com.yuenidong.activity.R;
 import com.yuenidong.util.Utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
- * @author SunnyCoffee
- * @create 2013-10-24
- * @version 1.0
+ * @author 石岩
+ * @create 2014-10-24
  * @desc 自定义Listview　下拉刷新,上拉加载更多
  */
 
 public class AutoListView extends ListView implements OnScrollListener {
+    View header;// 顶部布局文件；
+    int headerHeight;// 顶部布局文件的高度；
+    int firstVisibleItem;// 当前第一个可见的item的位置；
+    int scrollState;// listview 当前滚动状态；
+    boolean isRemark;// 标记，当前是在listview最顶端摁下的；
+    int startY;// 摁下时的Y值；
 
-	// 区分当前操作是刷新还是加载
-	public static final int REFRESH = 0;
-	public static final int LOAD = 1;
+    int state;// 当前的状态；
+    final int NONE = 0;// 正常状态；
+    final int PULL = 1;// 提示下拉状态；
+    final int RELESE = 2;// 提示释放状态；
+    final int REFLASHING = 3;// 刷新状态；
+    IReflashListener iReflashListener;// 刷新数据的接口
 
-	// 区分PULL和RELEASE的距离的大小
-	private static final int SPACE = 20;
+    // 底部布局
+    View footer;
+    // 总数量
+    int totalItemCount;
+    // 最后一个可见的item
+    int lastVisibleItem;
+    // 正在加载
+    boolean isLoading;
 
-	// 定义header的四种状态和当前状态
-	private static final int NONE = 0;
-	private static final int PULL = 1;
-	private static final int RELEASE = 2;
-	private static final int REFRESHING = 3;
-	private int state;
+    public AutoListView(Context context) {
+        super(context);
+        // TODO Auto-generated constructor stub
+        initView(context);
+    }
 
-	private LayoutInflater inflater;
-	private View header;
-	private View footer;
-	private TextView tip;
-	private TextView lastUpdate;
-	private ImageView arrow;
-	private ProgressBar refreshing;
+    public AutoListView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        // TODO Auto-generated constructor stub
+        initView(context);
+    }
 
-	private TextView noData;
-	private TextView loadFull;
-	private TextView more;
-	private ProgressBar loading;
+    public AutoListView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        // TODO Auto-generated constructor stub
+        initView(context);
+    }
 
-	private RotateAnimation animation;
-	private RotateAnimation reverseAnimation;
+    /**
+     * 初始化界面，添加顶部布局文件到 listview
+     *
+     * @param context
+     */
+    private void initView(Context context) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        header = inflater.inflate(R.layout.listview_header, null);
+        measureView(header);
+        headerHeight = header.getMeasuredHeight();
+        topPadding(-headerHeight);
+        this.addHeaderView(header);
 
-	private int startY;
+        footer = inflater.inflate(R.layout.listview_footer, null);
+        this.addFooterView(footer);
+        footer.findViewById(R.id.layout_load).setVisibility(View.GONE);
+        this.setOnScrollListener(this);
+    }
 
-	private int firstVisibleItem;
-	private int scrollState;
-	private int headerContentInitialHeight;
-	private int headerContentHeight;
+    /**
+     * 通知父布局，占用的宽，高；
+     *
+     * @param view
+     */
+    private void measureView(View view) {
+        ViewGroup.LayoutParams p = view.getLayoutParams();
+        if (p == null) {
+            p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        int width = ViewGroup.getChildMeasureSpec(0, 0, p.width);
+        int height;
+        int tempHeight = p.height;
+        if (tempHeight > 0) {
+            height = MeasureSpec.makeMeasureSpec(tempHeight,
+                    MeasureSpec.EXACTLY);
+        } else {
+            height = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+        }
+        view.measure(width, height);
+    }
 
-	// 只有在listview第一个item显示的时候（listview滑到了顶部）才进行下拉刷新， 否则此时的下拉只是滑动listview
-	private boolean isRecorded;
-	private boolean isLoading;// 判断是否正在加载
-	private boolean loadEnable = true;// 开启或者关闭加载更多功能
-	private boolean isLoadFull;
-	private int pageSize = 10;
+    /**
+     * 设置header 布局 上边距；
+     *
+     * @param topPadding
+     */
+    private void topPadding(int topPadding) {
+        header.setPadding(header.getPaddingLeft(), topPadding,
+                header.getPaddingRight(), header.getPaddingBottom());
+        header.invalidate();
+    }
 
-	private OnRefreshListener onRefreshListener;
-	private OnLoadListener onLoadListener;
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem,
+                         int visibleItemCount, int totalItemCount) {
+        // TODO Auto-generated method stub
+        this.firstVisibleItem = firstVisibleItem;
+        this.lastVisibleItem = firstVisibleItem + visibleItemCount;
+        this.totalItemCount = totalItemCount;
+    }
 
-	public AutoListView(Context context) {
-		super(context);
-		initView(context);
-	}
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        // TODO Auto-generated method stub
+        this.scrollState = scrollState;
+        if (lastVisibleItem == totalItemCount
+                && scrollState == SCROLL_STATE_IDLE) {
+            if (!isLoading) {
+                isLoading = true;
+                footer.findViewById(R.id.layout_load).setVisibility(
+                        View.VISIBLE);
+                // 加载更多数据
+                iReflashListener.onLoad();
+            }
 
-	public AutoListView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		initView(context);
-	}
+        }
+    }
 
-	public AutoListView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		initView(context);
-	}
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        // TODO Auto-generated method stub
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if (firstVisibleItem == 0) {
+                    isRemark = true;
+                    startY = (int) ev.getY();
+                }
+                break;
 
-	// 下拉刷新监听
-	public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
-		this.onRefreshListener = onRefreshListener;
-	}
+            case MotionEvent.ACTION_MOVE:
+                onMove(ev);
+                break;
+            case MotionEvent.ACTION_UP:
+                if (state == RELESE) {
+                    state = REFLASHING;
+                    // 加载最新数据；
+                    reflashViewByState();
+                    iReflashListener.onReflash();
+                } else if (state == PULL) {
+                    state = NONE;
+                    isRemark = false;
+                    reflashViewByState();
+                }
+                break;
+        }
+        return super.onTouchEvent(ev);
+    }
 
-	// 加载更多监听
-	public void setOnLoadListener(OnLoadListener onLoadListener) {
-		this.loadEnable = true;
-		this.onLoadListener = onLoadListener;
-	}
+    /**
+     * 判断移动过程操作；
+     *
+     * @param ev
+     */
+    private void onMove(MotionEvent ev) {
+        if (!isRemark) {
+            return;
+        }
+        int tempY = (int) ev.getY();
+        int space = tempY - startY;
+        int topPadding = space - headerHeight;
+        switch (state) {
+            case NONE:
+                if (space > 0) {
+                    state = PULL;
+                    reflashViewByState();
+                }
+                break;
+            case PULL:
+                topPadding(topPadding);
+                if (space > headerHeight + 30
+                        && scrollState == SCROLL_STATE_TOUCH_SCROLL) {
+                    state = RELESE;
+                    reflashViewByState();
+                }
+                break;
+            case RELESE:
+                topPadding(topPadding);
+                if (space < headerHeight + 30) {
+                    state = PULL;
+                    reflashViewByState();
+                } else if (space <= 0) {
+                    state = NONE;
+                    isRemark = false;
+                    reflashViewByState();
+                }
+                break;
+        }
+    }
 
-	public boolean isLoadEnable() {
-		return loadEnable;
-	}
+    /**
+     * 根据当前状态，改变界面显示；
+     */
+    private void reflashViewByState() {
+        TextView tip = (TextView) header.findViewById(R.id.tip);
+        ImageView arrow = (ImageView) header.findViewById(R.id.arrow);
+        ProgressBar progress = (ProgressBar) header.findViewById(R.id.progress);
+        RotateAnimation anim = new RotateAnimation(0, 180,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+        anim.setDuration(500);
+        anim.setFillAfter(true);
+        RotateAnimation anim1 = new RotateAnimation(180, 0,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+        anim1.setDuration(500);
+        anim1.setFillAfter(true);
+        switch (state) {
+            case NONE:
+                arrow.clearAnimation();
+                topPadding(-headerHeight);
+                break;
 
-	// 这里的开启或者关闭加载更多，并不支持动态调整
-	public void setLoadEnable(boolean loadEnable) {
-		this.loadEnable = loadEnable;
-		this.removeFooterView(footer);
-	}
+            case PULL:
+                arrow.setVisibility(View.VISIBLE);
+                progress.setVisibility(View.GONE);
+                tip.setText("下拉可以刷新！");
+                arrow.clearAnimation();
+                arrow.setAnimation(anim1);
+                break;
+            case RELESE:
+                arrow.setVisibility(View.VISIBLE);
+                progress.setVisibility(View.GONE);
+                tip.setText("松开可以刷新！");
+                arrow.clearAnimation();
+                arrow.setAnimation(anim);
+                break;
+            case REFLASHING:
+                topPadding(50);
+                arrow.setVisibility(View.GONE);
+                progress.setVisibility(View.VISIBLE);
+                tip.setText("正在刷新...");
+                arrow.clearAnimation();
+                break;
+        }
+    }
 
-	public int getPageSize() {
-		return pageSize;
-	}
+    /**
+     * 获取完数据；
+     */
+    public void reflashComplete() {
+        state = NONE;
+        isRemark = false;
+        reflashViewByState();
+        TextView lastupdatetime = (TextView) header
+                .findViewById(R.id.lastupdate_time);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        String time = format.format(date);
+        lastupdatetime.setText(time);
+    }
 
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
+    public void setInterface(IReflashListener iReflashListener) {
+        this.iReflashListener = iReflashListener;
+    }
 
-	// 初始化组件
-	private void initView(Context context) {
+    /**
+     * 刷新数据接口
+     *
+     * @author Administrator
+     */
+    public interface IReflashListener {
+        public void onReflash();
 
-		// 设置箭头特效
-		animation = new RotateAnimation(0, -180,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-		animation.setInterpolator(new LinearInterpolator());
-		animation.setDuration(100);
-		animation.setFillAfter(true);
+        public void onLoad();
+    }
 
-		reverseAnimation = new RotateAnimation(-180, 0,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-		reverseAnimation.setInterpolator(new LinearInterpolator());
-		reverseAnimation.setDuration(100);
-		reverseAnimation.setFillAfter(true);
-
-		inflater = LayoutInflater.from(context);
-		footer = inflater.inflate(R.layout.listview_footer, null);
-		loadFull = (TextView) footer.findViewById(R.id.loadFull);
-		noData = (TextView) footer.findViewById(R.id.noData);
-		more = (TextView) footer.findViewById(R.id.more);
-		loading = (ProgressBar) footer.findViewById(R.id.loading);
-
-		header = inflater.inflate(R.layout.pull_to_refresh_header, null);
-		arrow = (ImageView) header.findViewById(R.id.arrow);
-		tip = (TextView) header.findViewById(R.id.tip);
-		lastUpdate = (TextView) header.findViewById(R.id.lastUpdate);
-		refreshing = (ProgressBar) header.findViewById(R.id.refreshing);
-
-		// 为listview添加头部和尾部，并进行初始化
-		headerContentInitialHeight = header.getPaddingTop();
-		measureView(header);
-		headerContentHeight = header.getMeasuredHeight();
-//		topPadding(-headerContentHeight);
-//		this.addHeaderView(header);
-//		this.addFooterView(footer);
-		this.setOnScrollListener(this);
-	}
-
-	public void onRefresh() {
-		if (onRefreshListener != null) {
-			onRefreshListener.onRefresh();
-		}
-	}
-
-	public void onLoad() {
-		if (onLoadListener != null) {
-			onLoadListener.onLoad();
-		}
-	}
-
-	public void onRefreshComplete(String updateTime) {
-		lastUpdate.setText(this.getContext().getString(R.string.lastUpdateTime,
-				Utils.getCurrentTime()));
-		state = NONE;
-		refreshHeaderViewByState();
-	}
-
-	// 用于下拉刷新结束后的回调
-	public void onRefreshComplete() {
-		String currentTime = Utils.getCurrentTime();
-		onRefreshComplete(currentTime);
-	}
-
-	// 用于加载更多结束后的回调
-	public void onLoadComplete() {
-		isLoading = false;
-	}
-
-	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem,
-			int visibleItemCount, int totalItemCount) {
-		this.firstVisibleItem = firstVisibleItem;
-	}
-
-	@Override
-	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		this.scrollState = scrollState;
-		ifNeedLoad(view, scrollState);
-	}
-
-	// 根据listview滑动的状态判断是否需要加载更多
-	private void ifNeedLoad(AbsListView view, int scrollState) {
-		if (!loadEnable) {
-			return;
-		}
-		try {
-			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-					&& !isLoading
-					&& view.getLastVisiblePosition() == view
-							.getPositionForView(footer) && !isLoadFull) {
-				onLoad();
-				isLoading = true;
-			}
-		} catch (Exception e) {
-		}
-	}
-
-	/**
-	 * 监听触摸事件，解读手势
-	 */
-	@Override
-	public boolean onTouchEvent(MotionEvent ev) {
-//		switch (ev.getAction()) {
-//		case MotionEvent.ACTION_DOWN:
-//			if (firstVisibleItem == 0) {
-//				isRecorded = true;
-//				startY = (int) ev.getY();
-//			}
-//			break;
-//		case MotionEvent.ACTION_CANCEL:
-//		case MotionEvent.ACTION_UP:
-//			if (state == PULL) {
-//				state = NONE;
-//				refreshHeaderViewByState();
-//			} else if (state == RELEASE) {
-//				state = REFRESHING;
-//				refreshHeaderViewByState();
-//				onRefresh();
-//			}
-//			isRecorded = false;
-//			break;
-//		case MotionEvent.ACTION_MOVE:
-//			whenMove(ev);
-//			break;
-//		}
-		return super.onTouchEvent(ev);
-	}
-
-	// 解读手势，刷新header状态
-	private void whenMove(MotionEvent ev) {
-//		if (!isRecorded) {
-//			return;
-//		}
-//		int tmpY = (int) ev.getY();
-//		int space = tmpY - startY;
-//		int topPadding = space - headerContentHeight;
-//		switch (state) {
-//		case NONE:
-//			if (space > 0) {
-//				state = PULL;
-//				refreshHeaderViewByState();
-//			}
-//			break;
-//		case PULL:
-//			topPadding(topPadding);
-//			if (scrollState == SCROLL_STATE_TOUCH_SCROLL
-//					&& space > headerContentHeight + SPACE) {
-//				state = RELEASE;
-//				refreshHeaderViewByState();
-//			}
-//			break;
-//		case RELEASE:
-//			topPadding(topPadding);
-//			if (space > 0 && space < headerContentHeight + SPACE) {
-//				state = PULL;
-//				refreshHeaderViewByState();
-//			} else if (space <= 0) {
-//				state = NONE;
-//				refreshHeaderViewByState();
-//			}
-//			break;
-//		}
-
-	}
-
-	// 调整header的大小。其实调整的只是距离顶部的高度。
-//	private void topPadding(int topPadding) {
-//		header.setPadding(header.getPaddingLeft(), topPadding,
-//				header.getPaddingRight(), header.getPaddingBottom());
-//		header.invalidate();
-//	}
-
-	/**
-	 * 这个方法是根据结果的大小来决定footer显示的。
-	 * <p>
-	 * 这里假定每次请求的条数为10。如果请求到了10条。则认为还有数据。如过结果不足10条，则认为数据已经全部加载，这时footer显示已经全部加载
-	 * </p>
-	 * 
-	 * @param resultSize
-	 */
-	public void setResultSize(int resultSize) {
-//		if (resultSize == 0) {
-//			isLoadFull = true;
-//			loadFull.setVisibility(View.GONE);
-//			loading.setVisibility(View.GONE);
-//			more.setVisibility(View.GONE);
-//			noData.setVisibility(View.VISIBLE);
-//		} else if (resultSize > 0 && resultSize < pageSize) {
-//			isLoadFull = true;
-//			loadFull.setVisibility(View.VISIBLE);
-//			loading.setVisibility(View.GONE);
-//			more.setVisibility(View.GONE);
-//			noData.setVisibility(View.GONE);
-//		} else if (resultSize == pageSize) {
-//			isLoadFull = false;
-//			loadFull.setVisibility(View.GONE);
-//			loading.setVisibility(View.VISIBLE);
-//			more.setVisibility(View.VISIBLE);
-//			noData.setVisibility(View.GONE);
-//		}
-
-	}
-
-	// 根据当前状态，调整header
-	private void refreshHeaderViewByState() {
-//		switch (state) {
-//		case NONE:
-//			topPadding(-headerContentHeight);
-//			tip.setText(R.string.pull_to_refresh);
-//			refreshing.setVisibility(View.GONE);
-//			arrow.clearAnimation();
-//			arrow.setImageResource(R.drawable.pull_to_refresh_arrow);
-//			break;
-//		case PULL:
-//			arrow.setVisibility(View.VISIBLE);
-//			tip.setVisibility(View.VISIBLE);
-//			lastUpdate.setVisibility(View.VISIBLE);
-//			refreshing.setVisibility(View.GONE);
-//			tip.setText(R.string.pull_to_refresh);
-//			arrow.clearAnimation();
-//			arrow.setAnimation(reverseAnimation);
-//			break;
-//		case RELEASE:
-//			arrow.setVisibility(View.VISIBLE);
-//			tip.setVisibility(View.VISIBLE);
-//			lastUpdate.setVisibility(View.VISIBLE);
-//			refreshing.setVisibility(View.GONE);
-//			tip.setText(R.string.pull_to_refresh);
-//			tip.setText(R.string.release_to_refresh);
-//			arrow.clearAnimation();
-//			arrow.setAnimation(animation);
-//			break;
-//		case REFRESHING:
-//			topPadding(headerContentInitialHeight);
-//			refreshing.setVisibility(View.VISIBLE);
-//			arrow.clearAnimation();
-//			arrow.setVisibility(View.GONE);
-//			tip.setVisibility(View.GONE);
-//			lastUpdate.setVisibility(View.GONE);
-//			break;
-//		}
-	}
-
-	// 用来计算header大小的。比较隐晦。因为header的初始高度就是0,貌似可以不用。
-	private void measureView(View child) {
-		ViewGroup.LayoutParams p = child.getLayoutParams();
-		if (p == null) {
-			p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-					ViewGroup.LayoutParams.WRAP_CONTENT);
-		}
-		int childWidthSpec = ViewGroup.getChildMeasureSpec(0, 0 + 0, p.width);
-		int lpHeight = p.height;
-		int childHeightSpec;
-		if (lpHeight > 0) {
-			childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight,
-					MeasureSpec.EXACTLY);
-		} else {
-			childHeightSpec = MeasureSpec.makeMeasureSpec(0,
-					MeasureSpec.UNSPECIFIED);
-		}
-		child.measure(childWidthSpec, childHeightSpec);
-	}
-
-	/*
-	 * 定义下拉刷新接口
-	 */
-	public interface OnRefreshListener {
-		public void onRefresh();
-	}
-
-	/*
-	 * 定义加载更多接口
-	 */
-	public interface OnLoadListener {
-		public void onLoad();
-	}
+    /**
+     * 加载完毕
+     */
+    public void loadComplete() {
+        isLoading = false;
+        footer.findViewById(R.id.layout_load).setVisibility(
+                View.GONE);
+    }
 
 }

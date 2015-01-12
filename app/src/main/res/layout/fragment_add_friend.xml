@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout">
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <EditText
+        android:id="@+id/et_number"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:background="@color/white"
+        android:hint="@string/pleasetwo"
+        android:inputType="number"
+        android:maxLength="6" />
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/textfield_ic_search" />
+
+    <View
+        android:id="@+id/view_one"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="63.5dp"
+        android:background="@color/grayblack"></View>
+
+    <View
+        android:id="@+id/view_two"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="63.5dp"
+        android:background="@color/green"
+        android:visibility="gone"></View>
+
+</RelativeLayout>

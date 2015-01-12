@@ -12,7 +12,8 @@ import com.yuenidong.bean.FriendEntity;
 import java.util.List;
 
 /**
- * Created by Administrator on 2014/12/4.
+ * Created by 石岩 on 2014/12/4.
+ * 球友
  */
 public class FriendAdapter extends BaseAdapter {
     private Context context;

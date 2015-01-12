@@ -112,14 +112,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="4dp"
-        android:background="@color/layout"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-
     <FrameLayout
         android:id="@+id/layout_fragment_container"
         android:layout_width="fill_parent"

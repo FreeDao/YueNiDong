@@ -124,6 +124,17 @@
                         android:layout_toRightOf="@id/iv_two"
                         android:background="@drawable/ic_star" />
 
+                    <TextView
+                        android:id="@+id/tv_firstprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="16dp"
+                        android:text="40元/小时"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp" />
+
                 </RelativeLayout>
 
             </RelativeLayout>

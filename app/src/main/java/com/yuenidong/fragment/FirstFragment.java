@@ -5,16 +5,36 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.yuenidong.activity.FirstActivity;
 import com.yuenidong.activity.LoginActivity;
 import com.yuenidong.activity.MainActivity;
 import com.yuenidong.activity.R;
+import com.yuenidong.app.DsncLog;
+import com.yuenidong.app.RequestManager;
 import com.yuenidong.common.PreferenceUtil;
+import com.yuenidong.constants.YueNiDongConstants;
+import com.yuenidong.util.CommonUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -25,7 +45,7 @@ public class FirstFragment extends Fragment {
     @OnClick(R.id.btn_loginDirect)
     void logindirect() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
-        PreferenceUtil.setPreBoolean("isDirect",true);
+        PreferenceUtil.setPreBoolean("isDirect", true);
         intent.putExtra("isDirect", true);
         startActivity(intent);
     }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yuenidong.activity.R;
+import com.yuenidong.app.DsncLog;
 import com.yuenidong.common.AppData;
 
 import butterknife.ButterKnife;
@@ -24,6 +25,10 @@ import butterknife.OnClick;
  * 石岩  周边
  */
 public class MapFragment extends Fragment {
+    private boolean isMap=false;
+
+    private int status = 0;
+
     private static final int FRIEND_SELECTED = 1 << 0;
 
     private static final int COACH_SELECTED = 1 << 1;
@@ -58,42 +63,70 @@ public class MapFragment extends Fragment {
     void tv_friend() {
         refreshTab(FRIEND_SELECTED);
         hideView();
+        status = 0;
         view_friend_select.setVisibility(View.VISIBLE);
         view_venues.setVisibility(View.VISIBLE);
         view_coach.setVisibility(View.VISIBLE);
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = FriendFragment.newInstance();
-        fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
-        fragmentTransaction.commit();
+        if(!isMap) {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Fragment fragment = FriendFragment.newInstance();
+            fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
+            fragmentTransaction.commit();
+        }else{
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Fragment fragment = FriendMapFragment.newInstance();
+            fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
+            fragmentTransaction.commit();
+        }
     }
 
     @OnClick(R.id.rl_coach)
     void tv_coach() {
         refreshTab(COACH_SELECTED);
         hideView();
+        status = 1;
         view_coach_select.setVisibility(View.VISIBLE);
         view_friend.setVisibility(View.VISIBLE);
         view_venues.setVisibility(View.VISIBLE);
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = CoachFragment.newInstance();
-        fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
-        fragmentTransaction.commit();
+        if(!isMap) {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Fragment fragment = CoachFragment.newInstance();
+            fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
+            fragmentTransaction.commit();
+        }else{
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Fragment fragment = CoachMapFragment.newInstance();
+            fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
+            fragmentTransaction.commit();
+        }
+
     }
 
     @OnClick(R.id.rl_venues)
     void tv_venues() {
         refreshTab(VENUES_SELECTED);
         hideView();
+        status = 2;
         view_venues_select.setVisibility(View.VISIBLE);
         view_friend.setVisibility(View.VISIBLE);
         view_coach.setVisibility(View.VISIBLE);
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = VenuesFragment.newInstance();
-        fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
-        fragmentTransaction.commit();
+        if(!isMap) {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Fragment fragment = VenuesFragment.newInstance();
+            fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
+            fragmentTransaction.commit();
+        }else{
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Fragment fragment = VenuesMapFragment.newInstance();
+            fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
+            fragmentTransaction.commit();
+        }
     }
 
     public static MapFragment newInstance() {
@@ -120,15 +153,84 @@ public class MapFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         Button btn_showMap = (Button) getActivity().findViewById(R.id.actionbar_rightbutton);
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         btn_showMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment fragment = FriendMapFragment.newInstance();
-                fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
-                fragmentTransaction.commit();
+                if(!isMap){
+                    isMap=true;
+                }else{
+                    isMap=false;
+                }
+                switch (status) {
+                    case 0:
+                        if(isMap) {
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            Fragment fragment = FriendMapFragment.newInstance();
+                            fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
+                            fragmentTransaction.commit();
+                        }else{
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            Fragment fragment = FriendFragment.newInstance();
+                            fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
+                            fragmentTransaction.commit();
+                        }
+                        break;
+                    case 1:
+                        if(isMap) {
+                            FragmentTransaction fragmentTransaction2 = fragmentManager.beginTransaction();
+                            Fragment fragment2 = CoachMapFragment.newInstance();
+                            fragmentTransaction2.replace(R.id.layout_fragment_container, fragment2);
+                            fragmentTransaction2.commit();
+                        }else{
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            Fragment fragment = CoachFragment.newInstance();
+                            fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
+                            fragmentTransaction.commit();
+                        }
+                        break;
+                    case 2:
+                        if(isMap) {
+                            FragmentTransaction fragmentTransaction3 = fragmentManager.beginTransaction();
+                            Fragment fragment3 = VenuesMapFragment.newInstance();
+                            fragmentTransaction3.replace(R.id.layout_fragment_container, fragment3);
+                            fragmentTransaction3.commit();
+                        }else{
+                            FragmentTransaction fragmentTransaction3 = fragmentManager.beginTransaction();
+                            Fragment fragment3 = VenuesFragment.newInstance();
+                            fragmentTransaction3.replace(R.id.layout_fragment_container, fragment3);
+                            fragmentTransaction3.commit();
+                        }
+                        break;
+
+//                    //------------------------------------地图与交互界面进行切换--------------------------------
+//                    case 3:
+//                        status = 0;
+//                        DsncLog.e("status", status + "");
+//                        FragmentTransaction fragmentTransaction4 = fragmentManager.beginTransaction();
+//                        Fragment fragment4 = FriendFragment.newInstance();
+//                        fragmentTransaction4.replace(R.id.layout_fragment_container, fragment4);
+//                        fragmentTransaction4.commit();
+//                        break;
+//                    case 4:
+//                        status = 1;
+//                        DsncLog.e("status", status + "");
+//                        FragmentTransaction fragmentTransaction5 = fragmentManager.beginTransaction();
+//                        Fragment fragment5 = CoachFragment.newInstance();
+//                        fragmentTransaction5.replace(R.id.layout_fragment_container, fragment5);
+//                        fragmentTransaction5.commit();
+//                        break;
+//                    case 5:
+//                        status = 2;
+//                        DsncLog.e("status", status + "");
+//                        FragmentTransaction fragmentTransaction6 = fragmentManager.beginTransaction();
+//                        Fragment fragment6 = VenuesFragment.newInstance();
+//                        fragmentTransaction6.replace(R.id.layout_fragment_container, fragment6);
+//                        fragmentTransaction6.commit();
+//                        break;
+                }
             }
         });
     }
@@ -138,6 +240,7 @@ public class MapFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         ButterKnife.inject(this, view);
+        btn_right.setBackgroundResource(R.drawable.button_map);
         tv_title.setVisibility(View.VISIBLE);
         tv_title.setText(AppData.getString(R.string.main_map));
         btn_right.setVisibility(View.VISIBLE);
@@ -190,6 +293,5 @@ public class MapFragment extends Fragment {
         view_venues_select.setVisibility(View.GONE);
 
     }
-
 
 }

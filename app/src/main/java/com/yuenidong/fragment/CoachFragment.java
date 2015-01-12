@@ -13,6 +13,7 @@ import com.yuenidong.activity.R;
 import com.yuenidong.adapter.CoachAdapter;
 import com.yuenidong.bean.CoachEntity;
 import com.yuenidong.widget.AutoListView;
+import com.yuenidong.widget.LoadListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import butterknife.InjectView;
 public class CoachFragment extends Fragment implements AdapterView.OnItemClickListener {
     private List<CoachEntity> list;
     @InjectView(R.id.listview)
-    AutoListView listView;
+    LoadListView listView;
 
     public static CoachFragment newInstance() {
         CoachFragment fragment = new CoachFragment();

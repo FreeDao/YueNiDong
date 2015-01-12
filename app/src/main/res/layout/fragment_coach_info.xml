@@ -381,6 +381,7 @@
                 android:layout_below="@id/view_three">
 
                 <Button
+                    android:id="@+id/btn_coachcomment"
                     android:layout_width="fill_parent"
                     android:layout_height="48dp"
                     android:background="@drawable/button_me" />
@@ -471,6 +472,7 @@
                 android:layout_below="@id/view_four">
 
                 <Button
+                    android:id="@+id/btn_come"
                     android:layout_width="fill_parent"
                     android:layout_height="48dp"
                     android:background="@drawable/button_me" />
@@ -534,7 +536,8 @@
 
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/rl_bottombar"
             android:layout_width="fill_parent"
             android:layout_height="53dp"
             android:layout_below="@id/rl_part2"
@@ -542,106 +545,32 @@
             android:background="@drawable/bg_transparent"
             android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/ll_bottombar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical">
 
-                <!--<ImageButton-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="fill_parent"-->
-                <!--android:background="@drawable/button_login" />-->
-
-                <LinearLayout
+                <ImageButton
+                    android:id="@+id/iv_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="13dp"
-                    android:gravity="center_vertical">
+                    android:background="@drawable/ic_phone"
+                    />
 
-                    <ImageButton
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:background="@drawable/button_attention" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="11dp"
-                        android:text="关注"
-                        android:textColor="@color/grayblack"
-                        android:textSize="16dp" />
-                </LinearLayout>
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
-
-                <!--<ImageButton-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="fill_parent"-->
-                <!--android:background="@drawable/button_login" />-->
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tv_link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="13dp"
-                    android:gravity="center_vertical">
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/link"
+                    android:textColor="@color/grayblack"
+                    android:textSize="16dp" />
 
-                    <ImageButton
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:background="@drawable/button_talk" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="11dp"
-                        android:text="对话"
-                        android:textColor="@color/grayblack"
-                        android:textSize="16dp" />
-                </LinearLayout>
+            </LinearLayout>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
-
-                <!--<ImageButton-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="fill_parent"-->
-                <!--android:background="@drawable/button_login" />-->
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="13dp"
-                    android:gravity="center_vertical">
-
-                    <ImageButton
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:background="@drawable/button_defriend" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="11dp"
-                        android:text="拉黑"
-                        android:textColor="@color/grayblack"
-                        android:textSize="16dp" />
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 </ScrollView>

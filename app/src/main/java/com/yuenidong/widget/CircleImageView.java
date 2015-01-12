@@ -16,7 +16,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.widget.ImageView;
-
 import com.yuenidong.activity.R;
 
 public class CircleImageView extends ImageView {

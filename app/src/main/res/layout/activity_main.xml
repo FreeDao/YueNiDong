@@ -26,9 +26,9 @@
 
                 <ImageView
                     android:id="@+id/map"
-                    android:layout_marginTop="3dp"
                     android:layout_width="@dimen/tab_icon_sixe"
                     android:layout_height="@dimen/tab_icon_sixe"
+                    android:layout_marginTop="3dp"
                     android:scaleType="fitXY" />
 
                 <TextView
@@ -49,9 +49,9 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_marginTop="3dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -80,17 +80,32 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:layout_centerInParent="true"
+                        android:id="@+id/message"
+                        android:layout_width="@dimen/tab_icon_sixe"
+                        android:layout_height="@dimen/tab_icon_sixe"
+                        android:scaleType="fitXY" />
+                    <TextView
+                        android:id="@+id/msgTip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/tab_unread_bg"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center"
+                        android:visibility="gone"
+                         />
 
-                <ImageView
-                    android:id="@+id/message"
-                    android:layout_width="@dimen/tab_icon_sixe"
-                    android:layout_height="@dimen/tab_icon_sixe"
-                    android:scaleType="fitXY" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/message_text"

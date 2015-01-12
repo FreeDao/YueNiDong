@@ -11,11 +11,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.yuenidong.activity.FriendInfoActivity;
+import com.yuenidong.activity.PushMapActivity;
 import com.yuenidong.activity.R;
 import com.yuenidong.adapter.FriendAdapter;
 import com.yuenidong.app.DsncLog;
 import com.yuenidong.bean.FriendEntity;
 import com.yuenidong.widget.AutoListView;
+import com.yuenidong.widget.LoadListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ import butterknife.InjectView;
 public class FriendFragment extends Fragment implements AdapterView.OnItemClickListener {
     private List<FriendEntity> list;
     @InjectView(R.id.listview)
-    AutoListView listView;
+    LoadListView listView;
 
 
     public static FriendFragment newInstance() {

@@ -1,10 +1,12 @@
 package com.yuenidong.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.yuenidong.activity.R;
 import com.yuenidong.bean.FriendEntity;
@@ -13,7 +15,8 @@ import com.yuenidong.bean.VenuesEntity;
 import java.util.List;
 
 /**
- * Created by Administrator on 2014/12/4.
+ * Created by 石岩 on 2014/12/4.
+ * 场馆
  */
 public class VenuesAdapter extends BaseAdapter {
     private Context context;
@@ -47,6 +50,8 @@ public class VenuesAdapter extends BaseAdapter {
         if (convertView == null) {
 //            holder=new ViewBolder();
             convertView = inflater.inflate(R.layout.adapter_venues, null);
+            TextView tv_firstPrice = (TextView) convertView.findViewById(R.id.tv_firstprice);
+            tv_firstPrice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG );
 //            holder.imageView= (CircleImageView) convertView.findViewById(R.id.iv_touxiang);
 //            holder.tv_name= (TextView) convertView.findViewById(R.id.tv_name);
 //            holder.iv_sex= (ImageView) convertView.findViewById(R.id.iv_sex);

@@ -3,11 +3,10 @@
     android:layout_height="match_parent"
     android:background="@color/layout">
 
-    <com.yuenidong.widget.AutoListView
+    <com.yuenidong.widget.LoadListView
         android:id="@+id/listview"
-        android:background="@drawable/button_white"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:listSelector="@drawable/listview_match">
-        </com.yuenidong.widget.AutoListView>
+        android:background="@drawable/button_white"
+        android:listSelector="@drawable/listview_match"></com.yuenidong.widget.LoadListView>
 </FrameLayout>

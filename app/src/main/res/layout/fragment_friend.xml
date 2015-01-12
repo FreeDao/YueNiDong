@@ -2,10 +2,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.yuenidong.widget.AutoListView
+    <com.yuenidong.widget.LoadListView
         android:id="@+id/listview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/button_white"
-        android:listSelector="@drawable/listview_match"></com.yuenidong.widget.AutoListView>
+        android:listSelector="@drawable/listview_match"></com.yuenidong.widget.LoadListView>
 </FrameLayout>

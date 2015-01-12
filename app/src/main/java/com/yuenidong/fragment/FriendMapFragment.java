@@ -4,7 +4,9 @@ import android.annotation.TargetApi;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -33,10 +36,13 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.qinjia.util.PreferenceUitl;
 import com.yuenidong.activity.R;
 import com.yuenidong.adapter.FriendAdapter;
+import com.yuenidong.adapter.ViewPagerAdapter;
 import com.yuenidong.app.DsncLog;
 import com.yuenidong.bean.FriendEntity;
+import com.yuenidong.common.PreferenceUtil;
 import com.yuenidong.util.DsncLocation;
 import com.yuenidong.widget.HorizontialListView;
 import com.yuenidong.widget.ZoomControlView;
@@ -51,8 +57,9 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class FriendMapFragment extends Fragment {
+    private List<View> list_view;
+    private View view;
     private ZoomControlView mZoomControlView;
-    boolean isGetLocation = true;
     private double latitude;
     private double longtitude;
     private MapView mMapView;
@@ -64,8 +71,8 @@ public class FriendMapFragment extends Fragment {
     private List<FriendEntity> list = new ArrayList<FriendEntity>();
     @InjectView(R.id.container)
     FrameLayout mapFrameLayout;
-    @InjectView(R.id.listview)
-    HorizontialListView listView;
+    @InjectView(R.id.viewpager)
+    ViewPager viewPager;
 
 
     public static FriendMapFragment newInstance() {
@@ -124,60 +131,63 @@ public class FriendMapFragment extends Fragment {
         //缩放控制
         mZoomControlView = (ZoomControlView) view.findViewById(R.id.ZoomControlView);
         mZoomControlView.setMapView(mMapView);
-//        mMapView.getMap().setOnMapLoadedCallback(new BaiduMap.OnMapLoadedCallback() {
-//            @Override
-//            public void onMapLoaded() {
-//                refreshScaleAndZoomControl();
-//            }
-//        });
+        latitude = Double.parseDouble(PreferenceUtil.getPreString("latitude", ""));
+        longtitude = Double.parseDouble(PreferenceUtil.getPreString("longtitude", ""));
+        // 构造定位数据
+        MyLocationData locData = new MyLocationData.Builder()
+                .latitude(latitude)
+                .longitude(longtitude).build();
+        // 设置定位数据
+        mBaiduMap.setMyLocationData(locData);
+        // 设置定位图层的配置（定位模式，是否允许方向信息，用户自定义定位图标）
+        BitmapDescriptor mMakers = BitmapDescriptorFactory
+                .fromResource(R.drawable.pic_position);
+        MyLocationConfiguration config = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL, true, mMakers);
+        mBaiduMap.setMyLocationConfigeration(config);
+        getFriendsData();
+//        list_view = new ArrayList<View>();
+//        for (int i = 0; i <5; i++) {
+//                view = LayoutInflater.from(getActivity()).inflate(R.layout.adapter_friend_map, null);
+//            list_view.add(view);
+//        }
+//        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity(), list_view);
+//        viewPager.setAdapter(adapter);
+        return view;
+    }
 
-        //定位
-        DsncLocation.with(getActivity()).getLocation(new BDLocationListener() {
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        list_view = new ArrayList<View>();
+        for (int i = 0; i < 5; i++) {
+            view = LayoutInflater.from(getActivity()).inflate(R.layout.adapter_friend_map, null);
+            list_view.add(view);
+            final int finalI = i;
+            list_view.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getActivity(), finalI + "", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity(), list_view);
+        viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onReceiveLocation(BDLocation bdLocation) {
-                String address = bdLocation.getAddrStr();
-                DsncLog.e("当前地址为:", address);
-                int code = bdLocation.getLocType();
-                DsncLog.e("百度地图定位结果code:", code + "");
-                switch (code) {
-                    case 161:
-                        DsncLog.e("百度地图定位结果:", "成功");
-                        break;
-                    case 63:
-                        DsncLog.e("百度地图定位结果:", "网络异常");
-                        break;
-                    default:
-                        DsncLog.e("百度地图定位结果", "失败");
-                        break;
-                }
-                //获取经度
-                longtitude = bdLocation.getLongitude();
-                //获取纬度
-                latitude = bdLocation.getLatitude();
-                DsncLog.e("longtitude经度:", longtitude + "");
-                DsncLog.e("latitude纬度:", latitude + "");
+            public void onPageScrolled(int i, float v, int i2) {
 
-                if (isGetLocation) {
-                    // 构造定位数据
-                    MyLocationData locData = new MyLocationData.Builder()
-                            .accuracy(bdLocation.getRadius())
-                            .latitude(bdLocation.getLatitude())
-                            .longitude(bdLocation.getLongitude()).build();
-                    // 设置定位数据
-                    mBaiduMap.setMyLocationData(locData);
-                    // 设置定位图层的配置（定位模式，是否允许方向信息，用户自定义定位图标）
-                    BitmapDescriptor mMakers = BitmapDescriptorFactory
-                            .fromResource(R.drawable.pic_position);
-                    MyLocationConfiguration config = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.FOLLOWING, true, mMakers);
-                    mBaiduMap.setMyLocationConfigeration(config);
-                    getFriendsData();
-                    isGetLocation = false;
-                }
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                Toast.makeText(getActivity(), i + "滑动", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
             }
         });
-        FriendAdapter adapter = new FriendAdapter(getActivity(), list);
-        listView.setAdapter(adapter);
-        return view;
     }
 
     //得到球友数据

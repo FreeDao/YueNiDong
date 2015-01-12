@@ -294,6 +294,7 @@
                 android:layout_below="@id/view_one">
 
                 <Button
+                    android:id="@+id/btn_mymatch"
                     android:layout_width="fill_parent"
                     android:layout_height="48dp"
                     android:background="@drawable/button_me" />
@@ -333,6 +334,7 @@
                 android:layout_below="@id/view_two">
 
                 <Button
+                    android:id="@+id/btn_mycollection"
                     android:layout_width="fill_parent"
                     android:layout_height="48dp"
                     android:background="@drawable/button_me" />
@@ -372,6 +374,7 @@
                 android:layout_below="@id/view_three">
 
                 <Button
+                    android:id="@+id/btn_mysign"
                     android:layout_width="fill_parent"
                     android:layout_height="48dp"
                     android:background="@drawable/button_me" />
@@ -450,7 +453,8 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:id="@+id/rl_talk">
 
                 <!--<ImageButton-->
                 <!--android:layout_width="fill_parent"-->

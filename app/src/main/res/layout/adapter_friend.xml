@@ -41,8 +41,11 @@
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:gravity="start"
                         android:text="美女"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="0dp"
+                        android:includeFontPadding="false"
                         android:textColor="@color/black"
                         android:textSize="16dp" />
 

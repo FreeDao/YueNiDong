@@ -24,6 +24,7 @@
             android:hint="@string/inputphone"
             android:inputType="phone"
             android:maxLength="11"
+            android:text="13628688550"
             android:textColor="@color/black"
             android:textSize="16dp" />
 
@@ -51,6 +52,7 @@
             android:hint="@string/inputpassword"
             android:inputType="textPassword"
             android:maxLength="16"
+            android:text="123456bb"
             android:textColor="@color/black"
             android:textSize="16dp" />
 

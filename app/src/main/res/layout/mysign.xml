@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_venues_comment"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/rl_venues_info"
+        android:background="@color/white">
+
+        <com.yuenidong.widget.CircleImageView
+            android:id="@+id/iv_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_venues" />
+
+        <RelativeLayout
+            android:id="@+id/rl_one"
+            android:layout_width="fill_parent"
+            android:layout_height="32dp"
+            android:layout_alignTop="@id/iv_image"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/iv_image">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:layout_toLeftOf="@id/tv_time"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="天天想你台球厅(软件园中路店)"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:text="20:44"
+                android:textColor="@color/grayblack"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/iv_image"
+            android:layout_below="@id/iv_image"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="9dp"
+            android:maxLines="2"
+            android:text="这家台球厅还行，但是我最喜欢的还是石教练的那个露天台球模式，满满的爱意啊！"
+            android:textColor="@color/grayblack"
+            android:textSize="14dp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/grayblack"></View>
+    </RelativeLayout>
+
+</RelativeLayout>

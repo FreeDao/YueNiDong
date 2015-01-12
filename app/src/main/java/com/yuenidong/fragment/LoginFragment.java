@@ -6,8 +6,10 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.igexin.sdk.PushManager;
 import com.yuenidong.activity.MainActivity;
 import com.yuenidong.activity.PhoneValidationActivity;
 import com.yuenidong.activity.R;
@@ -23,14 +33,26 @@ import com.yuenidong.activity.ResetPasswordActivity;
 import com.yuenidong.activity.SinaOauthActivity;
 import com.yuenidong.activity.WxOauthActivity;
 import com.yuenidong.app.DsncLog;
+import com.yuenidong.app.RequestManager;
 import com.yuenidong.common.AppData;
 import com.yuenidong.common.PreferenceUtil;
+import com.yuenidong.constants.YueNiDongConstants;
+import com.yuenidong.util.CommonUtils;
+import com.yuenidong.util.Commvert;
+import com.yuenidong.util.TimeUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class LoginFragment extends Fragment {
+    private String cid;
     boolean isShowPassword = false;
     @InjectView(R.id.tv_forgetpassword)
     TextView tv_forgetpassword;
@@ -48,9 +70,54 @@ public class LoginFragment extends Fragment {
     //登录
     @OnClick(R.id.btn_login)
     void login() {
-        PreferenceUtil.setPreBoolean("isFirstLogin", false);
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        startActivity(intent);
+        //向服务器发送请求
+        final HashMap<String, String> map = new HashMap<String, String>();
+        map.put("phoneNum", et_phone.getText().toString().trim());
+        map.put("password", et_password.getText().toString().trim());
+        map.put("cid", cid);
+        JSONObject jsonObject = null;
+        try {
+            String str = CommonUtils.hashMapToJson(map);
+            jsonObject = new JSONObject(str);
+            DsncLog.e("jsonObject", jsonObject.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JsonRequest<JSONObject> jsonRequest = new JsonObjectRequest(
+                Request.Method.POST, YueNiDongConstants.LOGIN, jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("success", response.toString());
+                        Commvert commvert = new Commvert(response);
+                        if (commvert.getString("status").equals("-1")) {
+                            Toast.makeText(getActivity(), "用户名或密码错误!", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else if (!TextUtils.isEmpty(commvert.getString("userId"))) {
+                            PreferenceUtil.setPreString("userId", commvert.getString("userId"));
+                            PreferenceUtil.setPreBoolean("isFirstLogin", false);
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.toString());
+            }
+        }) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Accept", "application/json");
+                headers.put("Content-Type", "application/json; charset=UTF-8");
+                return headers;
+            }
+        };
+        RequestManager.addRequest(jsonRequest, this);
+
     }
 
     //微信注册
@@ -100,6 +167,8 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         ButterKnife.inject(this, view);
+        cid = PushManager.getInstance().getClientid(AppData.getContext());
+        PreferenceUtil.setPreString("cid", cid);
         tv_forgetpassword.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         et_phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

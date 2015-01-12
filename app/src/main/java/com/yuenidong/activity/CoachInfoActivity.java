@@ -1,5 +1,6 @@
 package com.yuenidong.activity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -26,7 +27,6 @@ public class CoachInfoActivity extends BaseActivity {
         Fragment fragment = CoachInfoFragment.newInstance();
         fragmentTransaction.replace(R.id.layout_container, fragment);
         fragmentTransaction.commit();
-
 
     }
 

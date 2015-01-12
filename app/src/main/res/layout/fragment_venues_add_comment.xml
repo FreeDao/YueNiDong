@@ -1,0 +1,73 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout"
+    tools:context="com.yuenidong.fragment.VenuesAddCommentFragment">
+
+    <EditText
+        android:id="@+id/et_comment"
+        android:layout_width="fill_parent"
+        android:layout_height="181dp"
+        android:background="@color/white"
+        android:gravity="top|left"
+        android:hint="写下那些深刻的体验与大家分享吧!"
+        android:maxLength="140"
+        android:textColorHint="@color/black" />
+
+    <RelativeLayout
+        android:id="@+id/rl_one"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/et_comment"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/tv_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/allpoint"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <RatingBar
+            android:id="@+id/ratingbar"
+            style="@style/ratingbar"
+            android:numStars="5"
+            android:stepSize="1"
+            android:layout_centerInParent="true"
+            android:rating="1"
+            android:minHeight="25dp"
+            android:maxHeight="25dp"
+            android:layout_marginLeft="32dp"
+            android:layout_toRightOf="@id/tv_one" />
+
+        <TextView
+            android:id="@+id/tv_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:text="1.0分"
+            android:textColor="@color/orange"
+            android:textSize="14dp" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_addsure"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/rl_one"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/button_login_two"
+        android:text="@string/addsure"
+        android:textColor="@color/white" />
+
+
+</RelativeLayout>

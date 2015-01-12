@@ -51,7 +51,7 @@ public class DsncLocation {
         //返回的定位结果是百度经纬度,默认值gcj02
         locationClientOption.setCoorType("bd09ll");
         //设置发起定位请求的间隔时间为5000ms
-//        locationClientOption.setScanSpan(1000);
+        locationClientOption.setScanSpan(2000);
         //设置打开GPS
         locationClientOption.setOpenGps(true);
         mLocationClient.setLocOption(locationClientOption);

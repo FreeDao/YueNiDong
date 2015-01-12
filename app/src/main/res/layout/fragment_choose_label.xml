@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_one"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/ic_area">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:hint="点亮你的标签吧(最多三个哦)"
+            android:textSize="16dp"
+            android:visibility="gone" />
+
+        <!--<ImageView-->
+        <!--android:background="@drawable/label_badminton_filled_delete"-->
+        <!--android:id="@+id/iv_one"-->
+        <!--android:layout_width="88dp"-->
+        <!--android:layout_height="21dp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginLeft="20dp" />-->
+
+        <!--<ImageView-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:id="@+id/iv_two"-->
+        <!--android:background="@drawable/label_basketball_filled_delete"-->
+        <!--android:layout_width="88dp"-->
+        <!--android:layout_height="21dp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_toRightOf="@id/iv_one" />-->
+
+        <!--<ImageView-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:background="@drawable/label_riding_filled_delete"-->
+        <!--android:id="@+id/iv_three"-->
+        <!--android:layout_width="88dp"-->
+        <!--android:layout_height="21dp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_toRightOf="@id/iv_two" />-->
+
+        <GridView
+            android:id="@+id/gridview_one"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:horizontalSpacing="8dp"
+            android:listSelector="@color/layout"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"></GridView>
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/gridview_two"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_one"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="37dp"
+        android:horizontalSpacing="20dp"
+        android:gravity="center_horizontal"
+        android:listSelector="@color/layout"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="16dp">
+    </GridView>
+
+</RelativeLayout>

@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/et_comment"
+        android:layout_width="fill_parent"
+        android:layout_height="160dp"
+        android:background="@color/white"
+        android:gravity="top|left"
+        android:hint="写下那些深刻的体验与大家分享吧!"
+        android:maxLength="140"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="14dp" />
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/et_comment"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/button_login_two"
+        android:text="@string/addsure"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

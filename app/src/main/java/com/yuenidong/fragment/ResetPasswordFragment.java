@@ -5,16 +5,36 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.igexin.sdk.PushManager;
 import com.yuenidong.activity.MainActivity;
 import com.yuenidong.activity.PhoneValidationActivity;
 import com.yuenidong.activity.R;
+import com.yuenidong.app.DsncLog;
+import com.yuenidong.app.RequestManager;
+import com.yuenidong.common.AppData;
 import com.yuenidong.common.PreferenceUtil;
+import com.yuenidong.constants.YueNiDongConstants;
+import com.yuenidong.util.CommonUtils;
+import com.yuenidong.util.Commvert;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -34,9 +54,52 @@ public class ResetPasswordFragment extends Fragment {
 
     @OnClick(R.id.btn_finish)
     void finish() {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        PreferenceUtil.setPreBoolean("isFirstLogin", true);
-        startActivity(intent);
+        //向服务器发送请求
+        final HashMap<String, String> map = new HashMap<String, String>();
+        DsncLog.e("userId",PreferenceUtil.getPreString("userId","")+"石头");
+        map.put("userId",PreferenceUtil.getPreString("userId",""));
+        map.put("password",et_password.getText().toString().trim());
+        JSONObject jsonObject = null;
+        try {
+            String str = CommonUtils.hashMapToJson(map);
+            jsonObject = new JSONObject(str);
+            DsncLog.e("jsonObject", jsonObject.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JsonRequest<JSONObject> jsonRequest = new JsonObjectRequest(
+                Request.Method.POST, YueNiDongConstants.UPDATE_INFO, jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("success修改密码", response.toString());
+                        Commvert commvert=new Commvert(response);
+                        if(commvert.getString("status").equals("1")) {
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            PreferenceUtil.setPreBoolean("isFirstLogin", true);
+                            startActivity(intent);
+                        }
+                        else{
+                            Toast.makeText(getActivity(),"修改密码失败!",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.toString());
+            }
+        }) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Accept", "application/json");
+                headers.put("Content-Type", "application/json; charset=UTF-8");
+                return headers;
+            }
+        };
+        RequestManager.addRequest(jsonRequest, this);
+
     }
 
     public static ResetPasswordFragment newInstance() {
