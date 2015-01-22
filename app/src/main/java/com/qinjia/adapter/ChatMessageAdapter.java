@@ -55,12 +55,15 @@ public class ChatMessageAdapter extends BaseAdapter {
 
 	private GotyeAPI api;
 
-	public ChatMessageAdapter(ChatPage activity, List<GotyeMessage> messageList) {
+    private String friendName;
+
+	public ChatMessageAdapter(ChatPage activity, List<GotyeMessage> messageList,String friendName) {
 		this.chatPage = activity;
 		this.messageList = messageList;
 		inflater = activity.getLayoutInflater();
 		api = GotyeAPI.getInstance();
 		currentLoginName = api.getCurrentLoginUser().getName();
+        this.friendName=friendName;
 	}
 
 	public void addMsgToBottom(GotyeMessage msg) {
@@ -196,7 +199,8 @@ public class ChatMessageAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		if (holder.tv_userId != null) {
-			holder.tv_userId.setText(message.getSender().name);
+//			holder.tv_userId.setText(message.getSender().name);
+			holder.tv_userId.setText(friendName);
 		}
 
 		switch (message.getType()) {

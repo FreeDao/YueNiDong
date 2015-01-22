@@ -18,6 +18,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.tencent.mm.sdk.constants.ConstantsAPI;
+import com.tencent.mm.sdk.modelbase.BaseReq;
+import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.modelmsg.SendAuth;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.yuenidong.activity.R;
 import com.yuenidong.activity.ResetPasswordActivity;
 import com.yuenidong.activity.SetPasswordActivity;
@@ -28,7 +35,11 @@ import com.yuenidong.common.AppData;
 import com.yuenidong.constants.YueNiDongConstants;
 import com.yuenidong.data.SinaUserData;
 import com.yuenidong.util.RandomDataUtil;
+import com.yuenidong.util.UrlUtil;
 import com.yuenidong.util.VibratorUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +54,14 @@ public class PhoneValidationFragment extends Fragment {
     private boolean isReset;
     private String phoneNumber;
     private SinaUserData mSinaUserData;
+
+    private final static String APP_ID = "wxa6e5ec6e5da42692";
+    private final static String APP_SECRET = "938c90598eab5c46983d5cb5bbb39855";
+    private String access_token;
+    private String openid;
+
+    // IWXAPI 是第三方app和微信通信的openapi接口
+    private IWXAPI api;
 
     /**
      * 服务http地址
@@ -100,7 +119,7 @@ public class PhoneValidationFragment extends Fragment {
         params.put("apikey", "c69ac6f4a6191d68a1a570816f14a713");
         params.put("tpl_id", "582497");
         params.put("tpl_value", "#code#=" + code);
-        DsncLog.e("code",code);
+        DsncLog.e("code", code);
         params.put("mobile", et_phone.getText().toString());
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, this.URI_TPL_SEND_SMS,
@@ -125,10 +144,9 @@ public class PhoneValidationFragment extends Fragment {
     //下一步
     @OnClick(R.id.btn_nextStep)
     void nextStep() {
-        if(et_validation.getText().toString().trim().equals(code)){
-            Toast.makeText(getActivity(),"验证码正确",Toast.LENGTH_SHORT).show();
-        }
-        else{
+        if (et_validation.getText().toString().trim().equals(code)) {
+            Toast.makeText(getActivity(), "验证码正确", Toast.LENGTH_SHORT).show();
+        } else {
             return;
         }
 
@@ -196,6 +214,10 @@ public class PhoneValidationFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_phone_validation, container, false);
         ButterKnife.inject(this, view);
+//        // 通过WXAPIFactory工厂，获取IWXAPI的实例
+//        api = WXAPIFactory.createWXAPI(getActivity(), APP_ID, false);
+//        api.handleIntent(getActivity().getIntent(), this);
+
         et_phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -226,6 +248,7 @@ public class PhoneValidationFragment extends Fragment {
         return view;
     }
 
+
     private void updateTextTimer() {
         btn_validation.setEnabled(false);
         final Timer timer = new Timer();
@@ -253,5 +276,23 @@ public class PhoneValidationFragment extends Fragment {
         }
         return false;
     }
+
+
+//    // 微信发送请求到第三方应用时，会回调到该方法
+//    @Override
+//    public void onReq(BaseReq req) {
+//        DsncLog.e("result", "req");
+//        switch (req.getType()) {
+//            case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
+////                goToGetMsg();
+//                break;
+//            case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
+////                goToShowMsg((ShowMessageFromWX.Req) req);
+//                break;
+//            default:
+//                break;
+//        }
+//    }
+
 
 }

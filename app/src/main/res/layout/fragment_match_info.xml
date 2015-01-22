@@ -274,6 +274,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="23dp"
                     android:layout_toRightOf="@id/tv_one"
+                    android:visibility="gone"
                     android:src="@drawable/ic_image" />
 
                 <com.yuenidong.widget.CircleImageView
@@ -281,6 +282,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_centerVertical="true"
+                    android:visibility="gone"
                     android:layout_marginLeft="7dp"
                     android:layout_toRightOf="@id/iv_one"
                     android:src="@drawable/ic_image" />
@@ -289,6 +291,7 @@
                     android:id="@+id/iv_three"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
+                    android:visibility="gone"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="7dp"
                     android:layout_toRightOf="@id/iv_two"
@@ -298,6 +301,7 @@
                     android:id="@+id/iv_four"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
+                    android:visibility="gone"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="7dp"
                     android:layout_toRightOf="@id/iv_three"
@@ -307,6 +311,7 @@
                     android:id="@+id/iv_five"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
+                    android:visibility="gone"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="7dp"
                     android:layout_toRightOf="@id/iv_four"
@@ -316,6 +321,7 @@
                     android:id="@+id/iv_six"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
+                    android:visibility="gone"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="7dp"
                     android:layout_toRightOf="@id/iv_five"

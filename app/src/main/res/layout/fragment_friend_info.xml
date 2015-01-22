@@ -46,6 +46,7 @@
                     android:textSize="16dp" />
 
                 <ImageView
+                    android:id="@+id/iv_sex"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_centerVertical="true"
@@ -63,6 +64,7 @@
                 android:layout_marginTop="8dp">
 
                 <TextView
+                    android:id="@+id/tv_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -98,23 +100,29 @@
                         android:id="@+id/iv_label_one"
                         android:layout_width="29dp"
                         android:layout_height="13dp"
-                        android:src="@drawable/ic_billiards" />
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_billiards"
+                        android:visibility="gone" />
 
                     <ImageView
-                        android:id="@+id/iv_lable_two"
+                        android:id="@+id/iv_label_two"
                         android:layout_width="29dp"
                         android:layout_height="13dp"
                         android:layout_marginLeft="5dp"
                         android:layout_toRightOf="@id/iv_label_one"
-                        android:src="@drawable/ic_basketball" />
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_basketball"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_label_three"
                         android:layout_width="40dp"
                         android:layout_height="13dp"
                         android:layout_marginLeft="5dp"
-                        android:layout_toRightOf="@id/iv_lable_two"
-                        android:src="@drawable/ic_badminton" />
+                        android:layout_toRightOf="@id/iv_label_two"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_badminton"
+                        android:visibility="gone" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -265,6 +273,7 @@
                     android:textSize="16dp" />
 
                 <TextView
+                    android:id="@+id/tv_sign"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -272,8 +281,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="16dp"
                     android:maxLines="2"
-                    android:text="快憋死我了，我要上厕所。厕所里面还蹲着一个人，你让我情何以堪，
-额！"
+                    android:text="快憋死我了，我要上厕所。厕所里面还蹲着一个人，你让我情何以堪，额！"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
 
@@ -300,6 +308,7 @@
                     android:background="@drawable/button_me" />
 
                 <TextView
+                    android:id="@+id/tv_"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -417,6 +426,7 @@
             android:orientation="horizontal">
 
             <RelativeLayout
+                android:id="@+id/rl_care"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1">
@@ -451,10 +461,10 @@
 
 
             <RelativeLayout
+                android:id="@+id/rl_talk"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:id="@+id/rl_talk">
+                android:layout_weight="1">
 
                 <!--<ImageButton-->
                 <!--android:layout_width="fill_parent"-->
@@ -485,6 +495,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_lahei"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1">

@@ -20,9 +20,8 @@ public interface SinaConstants {
     public static final String ACCESSYOKEN_URL = BASE_URL + "oauth2/access_token";
 
     //第三方应用授权回调页面
-    public static final String REDIRECT_URL = BASE_URL + "oauth2/default.html";
+    public static final String REDIRECT_URL = "http://www.yuenidong.com";
 
     public static final String USERS_SHOW_URL = BASE_URL + "2/users/show.json";
-
 
 }

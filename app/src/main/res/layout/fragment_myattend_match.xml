@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.yuenidong.fragment.MyattendMatchFragment">
 
-    <ListView
+    <com.yuenidong.widget.LoadListView
         android:id="@+id/listView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

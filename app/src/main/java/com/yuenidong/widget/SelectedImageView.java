@@ -22,7 +22,6 @@ public class SelectedImageView extends ImageView {
     private int count = 0;
     private boolean isSelected = false;
     private int count_select = 0;
-    private boolean isFirst;
     // 图片数组
     private Integer[] imgs2 = {R.drawable.label_billiards_grey,
             R.drawable.label_basketball_grey, R.drawable.label_running_grey,
@@ -45,111 +44,79 @@ public class SelectedImageView extends ImageView {
 
     private ImageView imageView;
 
-    public SelectedImageView(Context context, boolean isFirst,String str) {
+    public SelectedImageView(Context context, String str) {
         super(context);
-        this.isFirst = isFirst;
         // TODO Auto-generated constructor stub
         imageView = (ImageView) getRootView();
-        // unselected();
-
-//        for (int i = 0; i < sports.length; i++) {
-//            if (str.equals(sports[i]) && isFirst) {
-//                imageView.setBackgroundResource(imgs2[i]);
-//                isSelected = false;
-//            }
-//        }
+        for (int i = 0; i < sports.length; i++) {
+            if (sports[i].equals(str)) {
+                imageView.setBackgroundResource(imgs2[i]);
+                count = i;
+            }
+        }
         imageView.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 if (isSelected) {
                     unselected(sports[count]);
-                    System.out.println("未选中");
                     Toast.makeText(getContext(), "未选中", Toast.LENGTH_SHORT).show();
                 } else {
                     selected(sports[count]);
-                    System.out.println("已选中");
                     Toast.makeText(getContext(), "已选中", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    public SelectedImageView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-//		imageView = (ImageView) getRootView();
-//		// unselected();
-//		imageView.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View arg0) {
-//				if (isSelected) {
-//					unselected(sports[count]);
-//					System.out.println("未选中");
-//					Toast.makeText(getContext(), "未选中", Toast.LENGTH_SHORT).show();
-//				} else {
-//					selected(sports[count]);
-//					System.out.println("已选中");
-//					Toast.makeText(getContext(), "已选中", Toast.LENGTH_SHORT).show();
-//				}
-//			}
-//		});
-    }
-
     public void selected(String str) {
         for (int i = 0; i < sports.length; i++) {
             if (str.equals(sports[i])) {
                 YueNiDongConstants.count += 1;
-                DsncLog.e("count1",YueNiDongConstants.count+"");
-//                isFirst = false;
-//                if (YueNiDongConstants.count < 4) {
-//                    switch (YueNiDongConstants.count){
-//                        case 1:
-//                            PreferenceUtil.setPreString("label_one",str);
-//                            break;
-//                        case 2:
-//                            PreferenceUtil.setPreString("label_two",str);
-//                            break;
-//                        case 3:
-//                            PreferenceUtil.setPreString("label_three",str);
-//                            break;
-//                    }
+                DsncLog.e("count1", YueNiDongConstants.count + "");
+                if (YueNiDongConstants.count < 4) {
+                    switch (YueNiDongConstants.count) {
+                        case 1:
+                            PreferenceUtil.setPreString("label_one", str);
+                            break;
+                        case 2:
+                            PreferenceUtil.setPreString("label_two", str);
+                            break;
+                        case 3:
+                            PreferenceUtil.setPreString("label_three", str);
+                            break;
+                    }
                     imageView.setBackgroundResource(imgs1[i]);
                     count = i;
                     isSelected = true;
                 }
-//                if(YueNiDongConstants.count==4){
-//                    YueNiDongConstants.count=3;
-//                }
-//            }
+                if (YueNiDongConstants.count == 4) {
+                    YueNiDongConstants.count = 3;
+                }
+            }
         }
     }
 
     public void unselected(String str) {
         for (int i = 0; i < sports.length; i++) {
-            if (str.equals(sports[i]) && isFirst) {
+            if (str.equals(sports[i])) {
+                switch (YueNiDongConstants.count) {
+                    case 1:
+                        PreferenceUtil.setPreString("label_one", "");
+                        break;
+                    case 2:
+                        PreferenceUtil.setPreString("label_two", "");
+                        break;
+                    case 3:
+                        PreferenceUtil.setPreString("label_three", "");
+                        break;
+                }
+                YueNiDongConstants.count -= 1;
+                DsncLog.e("count", YueNiDongConstants.count + "");
                 imageView.setBackgroundResource(imgs2[i]);
                 count = i;
                 isSelected = false;
             }
-//            if (str.equals(sports[i]) && !isFirst) {
-//                switch(YueNiDongConstants.count){
-//                    case 1:
-//                        PreferenceUtil.setPreString("label_one","");
-//                        break;
-//                    case 2:
-//                        PreferenceUtil.setPreString("label_two","");
-//                        break;
-//                    case 3:
-//                        PreferenceUtil.setPreString("label_three","");
-//                        break;
-//                }
-//                YueNiDongConstants.count-=1;
-//                DsncLog.e("count",YueNiDongConstants.count+"");
-//                imageView.setBackgroundResource(imgs2[i]);
-//                count = i;
-                isSelected = false;
-//            }
         }
     }
 

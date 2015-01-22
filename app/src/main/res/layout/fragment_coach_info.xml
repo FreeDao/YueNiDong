@@ -54,6 +54,7 @@
                     android:textSize="16dp" />
 
                 <ImageView
+                    android:id="@+id/iv_sex"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_centerVertical="true"
@@ -71,6 +72,7 @@
                 android:layout_marginTop="8dp">
 
                 <TextView
+                    android:id="@+id/tv_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -106,6 +108,7 @@
                         android:id="@+id/iv_label_one"
                         android:layout_width="29dp"
                         android:layout_height="13dp"
+                        android:scaleType="fitXY"
                         android:src="@drawable/ic_billiards" />
 
                     <ImageView
@@ -114,15 +117,9 @@
                         android:layout_height="13dp"
                         android:layout_marginLeft="5dp"
                         android:layout_toRightOf="@id/iv_label_one"
+                        android:scaleType="fitXY"
                         android:src="@drawable/ic_basketball" />
 
-                    <ImageView
-                        android:id="@+id/iv_label_three"
-                        android:layout_width="40dp"
-                        android:layout_height="13dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_toRightOf="@id/iv_lable_two"
-                        android:src="@drawable/ic_badminton" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -273,6 +270,7 @@
                     android:textSize="16dp" />
 
                 <TextView
+                    android:id="@+id/tv_course"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="96dp"
@@ -315,6 +313,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tv_place"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="96dp"
@@ -345,21 +344,24 @@
                     android:background="@drawable/button_me" />
 
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
                     android:text="所获荣誉"
                     android:textColor="@color/grayblack"
-                    android:textSize="16dp"
 
-                    />
+                    android:textSize="16dp" />
 
                 <TextView
+                    android:id="@+id/tv_honour"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_marginLeft="96dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toEndOf="@+id/textView"
+                    android:layout_toRightOf="@+id/textView"
                     android:gravity="center_vertical"
                     android:text="乔氏杯2014大奖赛武汉赛区冠军"
                     android:textColor="@color/black"
@@ -409,33 +411,39 @@
                         android:id="@+id/iv_one"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:src="@drawable/ic_star" />
+                        android:src="@drawable/ic_star"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_two"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:src="@drawable/ic_star" />
+                        android:src="@drawable/ic_star"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_three"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:src="@drawable/ic_star" />
+                        android:src="@drawable/ic_star"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_four"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:src="@drawable/ic_star" />
+                        android:src="@drawable/ic_star"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_five"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:src="@drawable/ic_star" />
+                        android:src="@drawable/ic_star"
+                        android:visibility="gone" />
 
                     <TextView
+                        android:id="@+id/tv_point"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -498,35 +506,40 @@
                         android:id="@+id/iv_image_one"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_image" />
+                        android:src="@drawable/ic_image"
+                        android:visibility="gone" />
 
                     <com.yuenidong.widget.CircleImageView
                         android:id="@+id/iv_image_two"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="5dp"
-                        android:src="@drawable/ic_image" />
+                        android:src="@drawable/ic_image"
+                        android:visibility="gone" />
 
                     <com.yuenidong.widget.CircleImageView
                         android:id="@+id/iv_image_three"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="5dp"
-                        android:src="@drawable/ic_image" />
+                        android:src="@drawable/ic_image"
+                        android:visibility="gone" />
 
                     <com.yuenidong.widget.CircleImageView
                         android:id="@+id/iv_image_four"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="5dp"
-                        android:src="@drawable/ic_image" />
+                        android:src="@drawable/ic_image"
+                        android:visibility="gone" />
 
                     <com.yuenidong.widget.CircleImageView
                         android:id="@+id/iv_image_five"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="5dp"
-                        android:src="@drawable/ic_image" />
+                        android:src="@drawable/ic_image"
+                        android:visibility="gone" />
 
 
                 </LinearLayout>
@@ -556,8 +569,7 @@
                     android:id="@+id/iv_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_phone"
-                    />
+                    android:background="@drawable/ic_phone" />
 
                 <TextView
                     android:id="@+id/tv_link"

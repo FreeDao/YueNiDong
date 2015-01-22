@@ -193,9 +193,6 @@ public class SinaOauthFragment extends Fragment {
                         bundle.putSerializable("user", mSinaUserData);
                         intent.putExtras(bundle);
                         startActivity(intent);
-                        //上传到服务器
-//                        insertToServer();
-
                     }
                 }, new Response.ErrorListener() {
             @Override

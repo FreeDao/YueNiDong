@@ -23,6 +23,7 @@ import butterknife.OnClick;
  * 石岩  我的活动
  */
 public class MyMatchFragment extends Fragment {
+    private String userId;
     @InjectView(R.id.tv_mylanucher)
     TextView tv_mylanucher;
     @InjectView(R.id.tv_myattend)
@@ -48,7 +49,7 @@ public class MyMatchFragment extends Fragment {
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = MylanucherMatchFragment.newInstance();
+        Fragment fragment = MylanucherMatchFragment.newInstance(userId);
         fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
         fragmentTransaction.commit();
     }
@@ -65,17 +66,17 @@ public class MyMatchFragment extends Fragment {
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = MyattendMatchFragment.newInstance();
+        Fragment fragment = MyattendMatchFragment.newInstance(userId);
         fragmentTransaction.replace(R.id.layout_fragment_container, fragment);
         fragmentTransaction.commit();
 
     }
 
-    public static MyMatchFragment newInstance() {
+    public static MyMatchFragment newInstance(String userId) {
         MyMatchFragment fragment = new MyMatchFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        fragment.setArguments(args);
+        Bundle args = new Bundle();
+        args.putString("userId", userId);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -87,7 +88,7 @@ public class MyMatchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
+            userId = getArguments().getString("userId");
         }
     }
 

@@ -55,6 +55,7 @@
                         android:src="@drawable/ic_woman" />
 
                     <TextView
+                        android:id="@+id/tv_distance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -68,7 +69,7 @@
 
                 <!--第三层-->
                 <TextView
-                    android:id="@+id/tv_one"
+                    android:id="@+id/tv_sign"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -82,13 +83,14 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_above="@id/tv_one"
+                    android:layout_above="@id/tv_sign"
                     android:layout_below="@id/rl_one">
 
                     <ImageView
                         android:id="@+id/iv_hobby_one"
                         android:layout_width="29dp"
                         android:layout_height="13dp"
+                        android:visibility="gone"
                         android:layout_centerVertical="true"
                         android:background="@drawable/ic_basketball" />
 
@@ -98,6 +100,7 @@
                         android:layout_height="13dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
+                        android:visibility="gone"
                         android:layout_toRightOf="@id/iv_hobby_one"
                         android:background="@drawable/ic_billiards" />
 
@@ -105,6 +108,7 @@
                         android:id="@+id/iv_hobby_three"
                         android:layout_width="40dp"
                         android:layout_height="13dp"
+                        android:visibility="gone"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
                         android:layout_toRightOf="@id/iv_hobby_two"

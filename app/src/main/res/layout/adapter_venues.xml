@@ -44,7 +44,6 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="16dp"
                         android:layout_marginTop="1dp"
-                        android:text="0.22km"
                         android:textColor="@color/grayblack"
                         android:textSize="13dp" />
 
@@ -71,22 +70,22 @@
                     android:layout_alignParentBottom="true">
 
                     <TextView
-                        android:id="@+id/tv_price"
+                        android:id="@+id/tv_endprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="16dp"
                         android:layout_marginTop="1dp"
-                        android:text="20元/小时"
+                        android:text=""
                         android:textColor="@color/orange"
                         android:textSize="13dp" />
 
                     <TextView
-                        android:id="@+id/tv_one"
+                        android:id="@+id/tv_location"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:layout_toLeftOf="@id/tv_price"
+                        android:layout_toLeftOf="@id/tv_endprice"
                         android:ellipsize="end"
                         android:singleLine="true"
                         android:text="光谷/天下无敌大街"
@@ -106,7 +105,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:background="@drawable/ic_star" />
+                        android:background="@drawable/ic_star"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_two"
@@ -114,7 +114,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@id/iv_one"
-                        android:background="@drawable/ic_star" />
+                        android:background="@drawable/ic_star"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_three"
@@ -122,16 +123,35 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@id/iv_two"
-                        android:background="@drawable/ic_star" />
+                        android:background="@drawable/ic_star"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/iv_four"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/iv_three"
+                        android:background="@drawable/ic_star"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/iv_five"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/iv_four"
+                        android:background="@drawable/ic_star"
+                        android:visibility="gone" />
 
                     <TextView
-                        android:id="@+id/tv_firstprice"
+                        android:id="@+id/tv_startprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="16dp"
-                        android:text="40元/小时"
                         android:layout_centerVertical="true"
+                        android:layout_marginRight="16dp"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="10dp" />
 

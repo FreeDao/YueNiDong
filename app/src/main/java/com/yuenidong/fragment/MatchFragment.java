@@ -144,10 +144,10 @@ public class MatchFragment extends Fragment implements AutoListView.IReflashList
                                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                        DsncLog.e("12121212",i+"");
+                                        DsncLog.e("12121212", i + "");
                                         Intent intent = new Intent(getActivity(), MatchInfoActivity.class);
                                         Bundle bundle = new Bundle();
-                                        bundle.putSerializable("match", list.get(i-1));
+                                        bundle.putSerializable("match", list.get(i - 1));
                                         intent.putExtras(bundle);
                                         startActivity(intent);
                                     }
@@ -320,67 +320,5 @@ public class MatchFragment extends Fragment implements AutoListView.IReflashList
                 RequestManager.addRequest(jsonRequest, this);
             }
         }, 2000);
-//        pageNum++;
-//        final HashMap<String, String> map = new HashMap<String, String>();
-//        map.put("lat", PreferenceUtil.getPreString("latitude", ""));
-//        map.put("lng", PreferenceUtil.getPreString("longtitude", ""));
-//        map.put("pageNum", pageNum + "");
-//        map.put("count", count + "");
-//        JSONObject jsonObject = null;
-//        try {
-//            String str = CommonUtils.hashMapToJson(map);
-//            jsonObject = new JSONObject(str);
-//            DsncLog.e("jsonObject", jsonObject.toString());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        JsonRequest<JSONObject> jsonRequest = new JsonObjectRequest(
-//                Request.Method.POST, YueNiDongConstants.GETMATCHINFO, jsonObject,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        Log.e("获取活动信息success", response.toString());
-//                        try {
-//                            JSONArray jsonArray = response.getJSONArray("json");
-//                            if (jsonArray.length() == 0) {
-//                                DsncLog.e("获取活动信息success", "无活动信息");
-//                                Toast.makeText(getActivity(), "已经是最后一条信息!", Toast.LENGTH_SHORT).show();
-//                                pageNum--;
-//                                listView.loadComplete();
-//                                return;
-//                            } else {
-//                                Gson gson = new Gson();
-//                                Type type = new TypeToken<ArrayList<MatchInfoServerEntity>>() {
-//                                }.getType();
-//                                List<MatchInfoServerEntity> list2 = gson.fromJson(jsonArray.toString(), type);
-//                                for (int i = 0; i < list2.size(); i++) {
-//                                    list.add(list2.get(i));
-//                                }
-//
-//                                adapter.OnDateChange(list);
-//                                listView.loadComplete();
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            pageNum--;
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.e("error", error.toString());
-//                pageNum--;
-//            }
-//        }) {
-//
-//            @Override
-//            public Map<String, String> getHeaders() {
-//                HashMap<String, String> headers = new HashMap<String, String>();
-//                headers.put("Accept", "application/json");
-//                headers.put("Content-Type", "application/json; charset=UTF-8");
-//                return headers;
-//            }
-//        };
-//        RequestManager.addRequest(jsonRequest, this);
     }
 }

@@ -222,16 +222,13 @@ public class SetPasswordFragment extends Fragment {
                 String address = bdLocation.getAddrStr();
                 DsncLog.e("当前地址为:", address);
                 int code = bdLocation.getLocType();
-                DsncLog.e("百度地图定位结果code:", code + "");
+//                DsncLog.e("百度地图定位结果code:", code + "");
                 switch (code) {
                     case 161:
-                        DsncLog.e("百度地图定位结果:", "成功");
                         break;
                     case 63:
-                        DsncLog.e("百度地图定位结果:", "网络异常");
                         break;
                     default:
-                        DsncLog.e("百度地图定位结果", "失败");
                         break;
                 }
                 //获取经度
@@ -242,8 +239,8 @@ public class SetPasswordFragment extends Fragment {
 //                user.setLat(latitude + "");
                 PreferenceUtil.setPreString("longtitude", longtitude + "");
                 PreferenceUtil.setPreString("latitude", latitude + "");
-                DsncLog.e("longtitude经度:", longtitude + "");
-                DsncLog.e("latitude纬度:", latitude + "");
+//                DsncLog.e("longtitude经度:", longtitude + "");
+//                DsncLog.e("latitude纬度:", latitude + "");
             }
         });
     }

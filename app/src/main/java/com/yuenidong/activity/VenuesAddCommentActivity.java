@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.yuenidong.bean.VenuesCommentEntity;
+import com.yuenidong.bean.VenuesEntity;
 import com.yuenidong.common.AppData;
 import com.yuenidong.fragment.SetPasswordFragment;
 import com.yuenidong.fragment.VenuesAddCommentFragment;
@@ -26,6 +28,7 @@ public class VenuesAddCommentActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        VenuesEntity entity= (VenuesEntity) getIntent().getSerializableExtra("venues");
 
         showActionBarText(AppData.getString(R.string.addcomment));
         showActionBarRightButton();
@@ -33,7 +36,7 @@ public class VenuesAddCommentActivity extends BaseActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = VenuesAddCommentFragment.newInstance();
+        Fragment fragment = VenuesAddCommentFragment.newInstance(entity);
         fragmentTransaction.replace(R.id.layout_container, fragment);
         fragmentTransaction.commit();
     }

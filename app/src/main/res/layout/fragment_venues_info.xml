@@ -62,7 +62,8 @@
                     android:layout_height="13dp"
                     android:layout_alignLeft="@id/tv_venues_name"
                     android:layout_below="@id/tv_venues_name"
-                    android:background="@drawable/ic_star" />
+                    android:background="@drawable/ic_star"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/iv_venues_two"
@@ -71,7 +72,8 @@
                     android:layout_alignTop="@id/iv_venues_one"
                     android:layout_below="@id/tv_venues_name"
                     android:layout_toRightOf="@id/iv_venues_one"
-                    android:background="@drawable/ic_star" />
+                    android:background="@drawable/ic_star"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/iv_venues_three"
@@ -80,7 +82,8 @@
                     android:layout_alignTop="@id/iv_venues_one"
                     android:layout_below="@id/tv_venues_name"
                     android:layout_toRightOf="@id/iv_venues_two"
-                    android:background="@drawable/ic_star" />
+                    android:background="@drawable/ic_star"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/iv_venues_four"
@@ -89,7 +92,8 @@
                     android:layout_alignTop="@id/iv_venues_one"
                     android:layout_below="@id/tv_venues_name"
                     android:layout_toRightOf="@id/iv_venues_three"
-                    android:background="@drawable/ic_star" />
+                    android:background="@drawable/ic_star"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/iv_venues_five"
@@ -98,11 +102,13 @@
                     android:layout_alignTop="@id/iv_venues_one"
                     android:layout_below="@id/tv_venues_name"
                     android:layout_toRightOf="@id/iv_venues_four"
-                    android:background="@drawable/ic_star" />
+                    android:background="@drawable/ic_star"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_point"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/ll_ratingbar"
@@ -114,12 +120,13 @@
 
 
             <TextView
-                android:layout_alignTop="@id/ll_ratingbar"
-                android:layout_alignParentRight="true"
+                android:id="@+id/tv_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="99999条评价"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/ll_ratingbar"
                 android:layout_marginRight="10dp"
+                android:text="99999条评价"
                 android:textColor="@color/orange"
                 android:textSize="12dp" />
 
@@ -155,12 +162,14 @@
                 android:layout_toRightOf="@id/iv_image">
 
                 <TextView
+                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="美女" />
 
                 <TextView
+                    android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -184,7 +193,8 @@
                     android:layout_height="13dp"
                     android:layout_alignLeft="@id/rl_one"
                     android:layout_below="@id/rl_one"
-                    android:background="@drawable/ic_star" />
+                    android:background="@drawable/ic_star"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/iv_comment_two"
@@ -192,7 +202,8 @@
                     android:layout_height="13dp"
                     android:layout_below="@id/rl_one"
                     android:layout_toRightOf="@id/iv_comment_one"
-                    android:background="@drawable/ic_star" />
+                    android:background="@drawable/ic_star"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/iv_comment_three"
@@ -200,7 +211,8 @@
                     android:layout_height="13dp"
                     android:layout_below="@id/rl_one"
                     android:layout_toRightOf="@id/iv_comment_two"
-                    android:background="@drawable/ic_star" />
+                    android:background="@drawable/ic_star"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/iv_comment_four"
@@ -208,7 +220,8 @@
                     android:layout_height="13dp"
                     android:layout_below="@id/rl_one"
                     android:layout_toRightOf="@id/iv_comment_three"
-                    android:background="@drawable/ic_star" />
+                    android:background="@drawable/ic_star"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/iv_comment_five"
@@ -216,17 +229,19 @@
                     android:layout_height="13dp"
                     android:layout_below="@id/rl_one"
                     android:layout_toRightOf="@id/iv_comment_four"
-                    android:background="@drawable/ic_star" />
+                    android:background="@drawable/ic_star"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
             <TextView
-                android:layout_marginTop="9dp"
+                android:id="@+id/tv_content"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/iv_image"
                 android:layout_below="@id/ll_comment"
                 android:layout_marginRight="16dp"
+                android:layout_marginTop="9dp"
                 android:maxLines="2"
                 android:text="这家台球厅还行，但是我最喜欢的还是石教练的那个露天台球模式，满满的爱意啊！"
                 android:textColor="@color/grayblack"
@@ -264,6 +279,7 @@
                 android:background="@drawable/ic_next" />
 
             <TextView
+                android:id="@+id/tv_phone"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="96dp"
@@ -300,6 +316,7 @@
                 android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/tv_location"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="96dp"
@@ -325,7 +342,7 @@
             android:background="@color/white">
 
             <TextView
-                android:id="@+id/tv_time"
+                android:id="@+id/tv_time_word"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -335,6 +352,7 @@
                 android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/tv_time"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="96dp"
@@ -379,6 +397,7 @@
                 android:background="@drawable/ic_next" />
 
             <TextView
+                android:id="@+id/tv_signInCount"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="96dp"
@@ -404,7 +423,7 @@
             android:background="@color/white">
 
             <TextView
-                android:id="@+id/tv_service"
+                android:id="@+id/tv_service_word"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -414,6 +433,7 @@
                 android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/tv_service"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="96dp"
@@ -449,6 +469,7 @@
                 android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/tv_remark"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="96dp"
@@ -470,42 +491,41 @@
             android:layout_height="53dp"
             android:layout_below="@id/rl_beizhu"
             android:layout_marginTop="8dp"
-            android:gravity="center_vertical"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:gravity="center_vertical">
 
-        <TextView
+            <TextView
                 android:id="@+id/tv_secondprice"
                 android:layout_width="0dp"
-            android:layout_weight="1"
-            android:singleLine="true"
                 android:layout_height="fill_parent"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:singleLine="true"
                 android:text="20元/小时"
-            android:gravity="center_vertical"
                 android:textColor="@color/orange"
                 android:textSize="20dp" />
 
 
             <TextView
-                android:paddingTop="18dp"
                 android:id="@+id/tv_firstprice"
-                android:layout_marginLeft="5dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="fill_parent"
-                android:textSize="14dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:paddingTop="18dp"
                 android:text="40元/小时"
                 android:textColor="@color/black"
-                />
+                android:textSize="14dp" />
 
             <Button
-                android:layout_marginRight="16dp"
                 android:id="@+id/btn_predetermine"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
                 android:background="@drawable/button_nextstep"
                 android:text="@string/predeterminequick"
                 android:textColor="@color/white"

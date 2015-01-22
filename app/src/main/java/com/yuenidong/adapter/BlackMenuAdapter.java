@@ -1,13 +1,23 @@
 package com.yuenidong.adapter;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.Build;
+import android.text.TextUtils;
+import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.yuenidong.activity.R;
+import com.yuenidong.app.RequestManager;
 import com.yuenidong.bean.FriendEntity;
+import com.yuenidong.widget.CircleImageView;
 
 import java.util.List;
 
@@ -28,7 +38,7 @@ public class BlackMenuAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 50;
+        return list.size();
     }
 
     @Override
@@ -43,21 +53,120 @@ public class BlackMenuAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
-//        ViewBolder holder=null;
+        BlackMenuViewHolder holder = null;
         if (convertView == null) {
-//            holder=new ViewBolder();
+            holder = new BlackMenuViewHolder();
             convertView = inflater.inflate(R.layout.blackmenu, null);
-//            holder.imageView= (CircleImageView) convertView.findViewById(R.id.iv_touxiang);
-//            holder.tv_name= (TextView) convertView.findViewById(R.id.tv_name);
-//            holder.iv_sex= (ImageView) convertView.findViewById(R.id.iv_sex);
-//            holder.iv_level= (ImageView) convertView.findViewById(R.id.iv_level);
-//            if(sex.equals("female")){
-//                holder.iv_sex.setImageResource(R.drawable.ic_female);
-//            }
-//            convertView.setTag(holder);
+            holder.iv_image = (CircleImageView) convertView.findViewById(R.id.iv_image);
+            holder.tv_name = (TextView) convertView.findViewById(R.id.tv_name);
+            holder.iv_sex = (ImageView) convertView.findViewById(R.id.iv_sex);
+            holder.iv_label_one = (ImageView) convertView.findViewById(R.id.iv_hobby_one);
+            holder.iv_label_two = (ImageView) convertView.findViewById(R.id.iv_hobby_two);
+            holder.iv_label_three = (ImageView) convertView.findViewById(R.id.iv_hobby_three);
+            holder.tv_sign = (TextView) convertView.findViewById(R.id.tv_sign);
+            convertView.setTag(holder);
         } else {
-//            holder = (ViewBolder)convertView.getTag();
+            holder = (BlackMenuViewHolder) convertView.getTag();
         }
+        loadImageVolley(list.get(i).getUserImg(), holder.iv_image);
+        holder.tv_name.setText(list.get(i).getUserName());
+        if (list.get(i).getGender().equals("m")) {
+            holder.iv_sex.setImageResource(R.drawable.ic_man);
+        } else {
+            holder.iv_sex.setImageResource(R.drawable.ic_woman);
+        }
+        if (!TextUtils.isEmpty(list.get(i).getLabel1())) {
+            holder.iv_label_one.setVisibility(View.VISIBLE);
+            showImage(holder.iv_label_one, list.get(i).getLabel1());
+        } else {
+            holder.iv_label_one.setVisibility(View.GONE);
+        }
+        if (!TextUtils.isEmpty(list.get(i).getLabel2())) {
+            holder.iv_label_two.setVisibility(View.VISIBLE);
+            showImage(holder.iv_label_two, list.get(i).getLabel2());
+        } else {
+            holder.iv_label_two.setVisibility(View.GONE);
+        }
+        if (!TextUtils.isEmpty(list.get(i).getLabel3())) {
+            holder.iv_label_three.setVisibility(View.VISIBLE);
+            showImage(holder.iv_label_three, list.get(i).getLabel3());
+        } else {
+            holder.iv_label_three.setVisibility(View.GONE);
+        }
+        holder.tv_sign.setText(list.get(i).getSignature());
         return convertView;
     }
+
+    private void showImage(ImageView iv, String label1) {
+        if (label1.equals("台球")) {
+            iv.setImageResource(R.drawable.label_billiards_filled);
+        }
+        if (label1.equals("篮球")) {
+            iv.setImageResource(R.drawable.label_basketball_filled);
+        }
+        if (label1.equals("跑步")) {
+            iv.setImageResource(R.drawable.label_running_filled);
+        }
+        if (label1.equals("网球")) {
+            iv.setImageResource(R.drawable.label_tennis_filled);
+        }
+        if (label1.equals("羽毛球")) {
+            iv.setImageResource(R.drawable.label_badminton_filled);
+        }
+        if (label1.equals("足球")) {
+            iv.setImageResource(R.drawable.label_football_filled);
+        }
+        if (label1.equals("骑行")) {
+            iv.setImageResource(R.drawable.label_riding_filled);
+        }
+        if (label1.equals("乒乓球")) {
+            iv.setImageResource(R.drawable.label_tabletennis_filled);
+        }
+        if (label1.equals("游泳")) {
+            iv.setImageResource(R.drawable.label_swimming_filled);
+        }
+        if (label1.equals("健身")) {
+            iv.setImageResource(R.drawable.label_bodybuilding_filled);
+        }
+        if (label1.equals("滑板")) {
+            iv.setImageResource(R.drawable.label_slidingplate_filled);
+        }
+        if (label1.equals("轮滑")) {
+            iv.setImageResource(R.drawable.label_skidding_filled);
+        }
+    }
+
+    //加载网络图片
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
+    public void loadImageVolley(String imageurl, ImageView imageView) {
+//        String imageurl = "http://10.0.0.52/lesson-img.png";
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        final LruCache<String, Bitmap> lurcache = new LruCache<String, Bitmap>(
+                20);
+        ImageLoader.ImageCache imageCache = new ImageLoader.ImageCache() {
+            @Override
+            public void putBitmap(String key, Bitmap value) {
+                lurcache.put(key, value);
+            }
+
+            @Override
+            public Bitmap getBitmap(String key) {
+                return lurcache.get(key);
+            }
+        };
+        ImageLoader imageLoader = new ImageLoader(RequestManager.sRequestQueue, imageCache);
+        ImageLoader.ImageListener listener = imageLoader.getImageListener(imageView,
+                R.drawable.ic_launcher, R.drawable.ic_launcher);
+        imageLoader.get(imageurl, listener);
+    }
+}
+
+class BlackMenuViewHolder {
+    CircleImageView iv_image;
+    TextView tv_name;
+    ImageView iv_sex;
+    ImageView iv_label_one;
+    ImageView iv_label_two;
+    ImageView iv_label_three;
+    TextView tv_sign;
 }

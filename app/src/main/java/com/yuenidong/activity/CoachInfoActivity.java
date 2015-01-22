@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.yuenidong.bean.CoachEntity;
 import com.yuenidong.fragment.CoachFragment;
 import com.yuenidong.fragment.CoachInfoFragment;
 
@@ -18,13 +19,12 @@ public class CoachInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        CoachEntity entity= (CoachEntity) getIntent().getSerializableExtra("coach");
         hideActionbar();
-
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = CoachInfoFragment.newInstance();
+        Fragment fragment = CoachInfoFragment.newInstance(entity);
         fragmentTransaction.replace(R.id.layout_container, fragment);
         fragmentTransaction.commit();
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -60,11 +61,13 @@ public class MylanucherMatchFragment extends Fragment implements LoadListView.IL
     @InjectView(R.id.listView)
     LoadListView listView;
 
-    public static MylanucherMatchFragment newInstance() {
+    private String userId;
+
+    public static MylanucherMatchFragment newInstance(String userId) {
         MylanucherMatchFragment fragment = new MylanucherMatchFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        fragment.setArguments(args);
+        Bundle args = new Bundle();
+        args.putString("userId", userId);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -76,7 +79,7 @@ public class MylanucherMatchFragment extends Fragment implements LoadListView.IL
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
+            userId = getArguments().getString("userId");
         }
     }
 
@@ -91,7 +94,7 @@ public class MylanucherMatchFragment extends Fragment implements LoadListView.IL
         listView.setAdapter(adapter);
         //获取我发起的活动
         final HashMap<String, String> map = new HashMap<String, String>();
-        map.put("userId", PreferenceUtil.getPreString("userId", ""));
+        map.put("userId", userId);
         map.put("pageNum", pageNum + "");
         map.put("count", count + "");
         JSONObject jsonObject = null;
@@ -164,62 +167,70 @@ public class MylanucherMatchFragment extends Fragment implements LoadListView.IL
 
     @Override
     public void onLoad() {
-        pageNum++;
-        //获取我发起的活动
-        final HashMap<String, String> map = new HashMap<String, String>();
-        map.put("userId", PreferenceUtil.getPreString("userId", ""));
-        map.put("pageNum", pageNum + "");
-        map.put("userId", count + "");
-        JSONObject jsonObject = null;
-        try {
-            String str = CommonUtils.hashMapToJson(map);
-            jsonObject = new JSONObject(str);
-            DsncLog.e("jsonObject", jsonObject.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        JsonRequest<JSONObject> jsonRequest = new JsonObjectRequest(
-                Request.Method.POST, YueNiDongConstants.GETMYLAUNCHERMATCH, jsonObject,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Commvert commvert = new Commvert(response);
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("json");
-                            if (jsonArray.length() == 0) {
-                               Toast.makeText(getActivity(),"已经是最后一条活动信息!",Toast.LENGTH_SHORT).show();
-                                return;
-                            } else {
-                                Gson gson = new Gson();
-                                Type type = new TypeToken<ArrayList<MatchInfoServerEntity>>() {
-                                }.getType();
-                                List<MatchInfoServerEntity> list2 = gson.fromJson(jsonArray.toString(), type);
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    list.add(list2.get(i));
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pageNum++;
+                //获取我发起的活动
+                final HashMap<String, String> map = new HashMap<String, String>();
+                map.put("userId", userId);
+                map.put("pageNum", pageNum + "");
+                map.put("count", count + "");
+                JSONObject jsonObject = null;
+                try {
+                    String str = CommonUtils.hashMapToJson(map);
+                    jsonObject = new JSONObject(str);
+                    DsncLog.e("jsonObject", jsonObject.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                JsonRequest<JSONObject> jsonRequest = new JsonObjectRequest(
+                        Request.Method.POST, YueNiDongConstants.GETMYLAUNCHERMATCH, jsonObject,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Commvert commvert = new Commvert(response);
+                                try {
+                                    JSONArray jsonArray = response.getJSONArray("json");
+                                    if (jsonArray.length() == 0) {
+                                        Toast.makeText(getActivity(), "已经是最后一条活动信息!", Toast.LENGTH_SHORT).show();
+                                        listView.loadComplete();
+                                        return;
+                                    } else {
+                                        Gson gson = new Gson();
+                                        Type type = new TypeToken<ArrayList<MatchInfoServerEntity>>() {
+                                        }.getType();
+                                        List<MatchInfoServerEntity> list2 = gson.fromJson(jsonArray.toString(), type);
+                                        for (int i = 0; i < jsonArray.length(); i++) {
+                                            list.add(list2.get(i));
+                                        }
+                                        adapter.notifyDataSetChanged();
+                                        listView.loadComplete();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                                adapter.notifyDataSetChanged();
+
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error", error.toString());
+                        pageNum--;
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("error", error.toString());
-                pageNum--;
-            }
-        }) {
+                }) {
 
-            @Override
-            public Map<String, String> getHeaders() {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Accept", "application/json");
-                headers.put("Content-Type", "application/json; charset=UTF-8");
-                return headers;
+                    @Override
+                    public Map<String, String> getHeaders() {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put("Accept", "application/json");
+                        headers.put("Content-Type", "application/json; charset=UTF-8");
+                        return headers;
+                    }
+                };
+                RequestManager.addRequest(jsonRequest, this);
             }
-        };
-        RequestManager.addRequest(jsonRequest, this);
+        }, 2000);
     }
 }

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.yuenidong.activity.R;
 import com.yuenidong.app.DsncLog;
+import com.yuenidong.bean.MyUserEntity;
 import com.yuenidong.common.PreferenceUtil;
 import com.yuenidong.widget.SelectedImageView;
 
@@ -24,12 +25,14 @@ public class GridTwoAdapter extends BaseAdapter {
     private List<Integer> list;
     private int screenWidthDp;
     private int screenHeightDp;
+    private MyUserEntity user;
 
-    public GridTwoAdapter(Context context, List<Integer> list, int screenWidthDp, int screenHeightDp) {
+    public GridTwoAdapter(Context context, List<Integer> list, int screenWidthDp, int screenHeightDp, MyUserEntity user) {
         this.context = context;
         this.list = list;
         this.screenWidthDp = screenWidthDp;
         this.screenHeightDp = screenHeightDp;
+        this.user = user;
     }
 
     @Override
@@ -49,12 +52,9 @@ public class GridTwoAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-
         SelectedImageView imageView;
         if (convertView == null) {
-            imageView = new SelectedImageView(context, true, sports[position]);
-            DsncLog.e("screenWidthDp-250/3", (screenWidthDp - 250) / 3 + "");
-            DsncLog.e("(screenHeightDp - 250) / 3)", (screenHeightDp - 250) / 3 + "");
+            imageView = new SelectedImageView(context, sports[position]);
             imageView.setLayoutParams(new GridView.LayoutParams((screenWidthDp - 250) / 3, (screenWidthDp - 250) / 3));//设置ImageView对象布局
 //            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));//设置ImageView对象布局
             imageView.setAdjustViewBounds(false);//设置边界对齐
@@ -63,17 +63,10 @@ public class GridTwoAdapter extends BaseAdapter {
         } else {
             imageView = (SelectedImageView) convertView;
         }
-        DsncLog.e("position", position + "");
-        DsncLog.e("sports[position]", sports[position]);
-        DsncLog.e("one", PreferenceUtil.getPreString("label_one", ""));
-        DsncLog.e("two", PreferenceUtil.getPreString("label_two", ""));
-        DsncLog.e("three", PreferenceUtil.getPreString("label_three", ""));
-        imageView.unselected(sports[position]);//为ImageView设置图片资源
-//        if (sports[position].equals(PreferenceUtil.getPreString("label_one", "")) ||
-//                sports[position].equals(PreferenceUtil.getPreString("label_two", "")) ||
-//                sports[position].equals(PreferenceUtil.getPreString("label_three", ""))) {
-//            imageView.selected(sports[position]);//为ImageView设置图片资源
-//        }
+        if (sports[position].equals(user.getLabel1()) || sports[position].equals(user.getLabel2()) || sports[position].equals(user.getLabel3())) {
+            imageView.selected(sports[position]);
+        }
+
         return imageView;
     }
 }

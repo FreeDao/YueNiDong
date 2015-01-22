@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class YueNiDongConstants {
     public static int count = 0;
     //    public static final String BASE_URL = "http://app.yuenidong.com/rrydBack1.1";
-    public static final String BASE_URL = "http://192.168.20.107:8080/rrydBack1.1";
+    public static final String BASE_URL = "http://192.168.20.103:8080/rrydBack1.1";
     //注册
     public static final String REGISTER_URL = BASE_URL + "/user/registerUser";
     //登录
@@ -38,11 +38,39 @@ public class YueNiDongConstants {
     //活动点赞
     public static final String MATCHPRAISE = BASE_URL + "/user/like";
     //参加活动
-    public static final String ATTENDMATCH = BASE_URL + "/activity/joinAC";
+    public static final String ATTENDMATCH = BASE_URL + "/activity/joinCamp";
     //添加活动评论
     public static final String ADDREMARK = BASE_URL + "/remark/addAcRemark";
     //获取活动评论
     public static final String GETREMARK = BASE_URL + "/remark/checkAcRemark";
+    //获取我参与的活动
+    public static final String GETMYATTENDMATCH = BASE_URL + "/activity/getMyJoinAc";
     //获取我发起的活动
     public static final String GETMYLAUNCHERMATCH = BASE_URL + "/activity/getMyStartAc";
+    //获取球友信息
+    public static final String GETFRIENDINFO = BASE_URL + "/user/getAllUserByScope";
+    //添加关注
+    public static final String ADDCARE = BASE_URL + "/user/addCare";
+    //拉黑
+    public static final String ADDBLACK = BASE_URL + "/user/addBlack";
+    //活动详情(最近来过)
+    public static final String RECENTCOME = BASE_URL + "/activity/getAcVisitor";
+    //我的黑名单
+    public static final String BLACKMENU = BASE_URL + "/user/getBlackList";
+    //移除黑名单
+    public static final String REMOVEBLACKMENU = BASE_URL + "/user/delBlack";
+    //查找所有场馆
+    public static final String GETVENDER = BASE_URL + "/vender/getAllVender";
+    //查找所有场馆(分页)
+    public static final String GETVENDERBYPAGE = BASE_URL + "/vender/getVenderByPage";
+    //获取场馆评论信息
+    public static final String GETVENUESCOMMENT = BASE_URL + "/remark/checkVeRemark";
+    //场馆收藏
+    public static final String VENUESCOLLECTION = BASE_URL + "/vender/collectVender";
+    //教练最近来过
+    public static final String COACHRECENTCOME = BASE_URL + "/vender/getCoachVisitor";
+    //添加场馆评价
+    public static final String ADDVENUESCOMMENT = BASE_URL + "/remark/addVeRemark";
+    //获取所有伙伴
+    public static final String GETALLFRIEND = BASE_URL + "/user/getAllUser";
 }

@@ -19,10 +19,10 @@ public class MyMatchActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         showActionBarText(AppData.getString(R.string.mysport));
-
+        String userId = getIntent().getStringExtra("userId");
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = MyMatchFragment.newInstance();
+        Fragment fragment = MyMatchFragment.newInstance(userId);
         fragmentTransaction.replace(R.id.layout_container, fragment);
         fragmentTransaction.commit();
 

@@ -186,124 +186,55 @@
 
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTop"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ViewPagerActivity"
-             />
+        <activity android:name=".ViewPagerActivity" />
         <activity
             android:name=".LoginActivity"
             android:launchMode="singleTop" />
-        <activity
-            android:name=".PhoneValidationActivity"
-      />
-        <activity
-            android:name=".SetPasswordActivity"
-             />
-        <activity
-            android:name=".ResetPasswordActivity"
-          />
+        <activity android:name=".SetPasswordActivity" />
+        <activity android:name=".ResetPasswordActivity" />
         <activity
             android:name=".FirstActivity"
             android:launchMode="singleTask" />
-        <activity
-            android:name=".SinaOauthActivity"
-            />
-        <activity
-            android:name=".WxOauthActivity"
-            />
-        <activity
-            android:name=".FriendInfoActivity"
-           />
-        <activity
-            android:name=".CoachInfoActivity"
-           />
-        <activity
-            android:name=".PushMapActivity"
-             />
-        <activity
-            android:name=".MatchInfoActivity"
-            />
-        <activity
-            android:name=".LanucherMatchActivity"
-           />
-        <activity
-            android:name=".MatchPlaceActivity"
-          />
-        <activity
-            android:name=".RewardCoinActivity"
-            />
-        <activity
-            android:name=".ComeRecentActivity"
-         />
-        <activity
-            android:name=".VenuesInfoActivity"
-          />
-        <activity
-            android:name=".VenuesCommentActivity"
-           />
-        <activity
-            android:name=".VenuesSignActivity"
-          />
-        <activity
-            android:name=".VenuesAddCommentActivity"
-             />
-        <activity
-            android:name=".CoachCommentActivity"
-             />
-        <activity
-            android:name=".BookingQuicklyActivity"
-           />
-        <activity
-            android:name=".PayActivity"
-             />
-        <activity
-            android:name=".MyOrderActivity"
-           />
-        <activity
-            android:name=".MyOrderInfoActivity"
-           />
-        <activity
-            android:name=".MyMatchActivity"
-           />
-        <activity
-            android:name=".MySignActivity"
-          />
-        <activity
-            android:name=".BlackMenuActivity"
-          />
-        <activity
-            android:name=".MyCollectionActivity"
-           />
-        <activity
-            android:name=".VenuesAddSignActivity"
-           />
-        <activity
-            android:name=".CoachAddCommentActivity"
-          />
-        <activity
-            android:name=".AddFriendActivity"
-           />
-        <activity
-            android:name=".ChooseLabelActivity"
-           />
+        <activity android:name=".SinaOauthActivity" />
+        <activity android:name="com.yuenidong.activity.PhoneValidationActivity" />
+        <activity android:name=".FriendInfoActivity" />
+        <activity android:name=".CoachInfoActivity" />
+        <activity android:name=".PushMapActivity" />
+        <activity android:name=".MatchInfoActivity" />
+        <activity android:name=".LanucherMatchActivity" />
+        <activity android:name=".MatchPlaceActivity" />
+        <activity android:name=".RewardCoinActivity" />
+        <activity android:name=".ComeRecentActivity" />
+        <activity android:name=".VenuesInfoActivity" />
+        <activity android:name=".VenuesCommentActivity" />
+        <activity android:name=".VenuesSignActivity" />
+        <activity android:name=".VenuesAddCommentActivity" />
+        <activity android:name=".CoachCommentActivity" />
+        <activity android:name=".BookingQuicklyActivity" />
+        <activity android:name=".PayActivity" />
+        <activity android:name=".MyOrderActivity" />
+        <activity android:name=".MyOrderInfoActivity" />
+        <activity android:name=".MyMatchActivity" />
+        <activity android:name=".MySignActivity" />
+        <activity android:name=".BlackMenuActivity" />
+        <activity android:name=".MyCollectionActivity" />
+        <activity android:name=".VenuesAddSignActivity" />
+        <activity android:name=".CoachAddCommentActivity" />
+        <activity android:name=".AddFriendActivity" />
+        <activity android:name=".ChooseLabelActivity" />
         <activity android:name="com.qinjia.activity.ChatPage" />
         <activity android:name="com.qinjia.activity.ShowBigImage" />
         <activity
             android:name=".MyInfoUpdateActivity"
             android:windowSoftInputMode="stateHidden"></activity>
-        <!--<activity-->
-        <!--android:name=".wxapi.WXEntryActivity"-->
-        <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
-        <!--android:exported="true"-->
-        <!--android:label="@string/title_activity_wxentry"-->
-        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>-->
 
         <activity
             android:name="cn.sharesdk.framework.ShareSDKUIShell"
@@ -321,9 +252,11 @@
             </intent-filter>
         </activity>
 
+
+        <!--android:name="cn.sharesdk.demo.wxapi.WXEntryActivity"-->
         <!-- 微信分享回调 -->
         <activity
-            android:name="cn.sharesdk.demo.wxapi.WXEntryActivity"
+            android:name="com.yuenidong.activity.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"

@@ -121,6 +121,7 @@
                         android:layout_marginLeft="5dp"
                         android:visibility="gone"
                         android:layout_toRightOf="@id/iv_label_one"
+                        android:scaleType="fitXY"
                         android:src="@drawable/label_basketball_filled" />
 
                     <ImageView

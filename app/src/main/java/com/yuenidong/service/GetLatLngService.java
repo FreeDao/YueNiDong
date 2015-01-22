@@ -37,18 +37,16 @@ public class GetLatLngService extends Service {
 //                        DsncLog.e("Service百度地图定位结果:", "成功");
                         break;
                     case 63:
-                        DsncLog.e("Service百度地图定位结果:", "网络异常");
+//                        DsncLog.e("Service百度地图定位结果:", "网络异常");
                         break;
                     default:
-                        DsncLog.e("Service百度地图定位结果", "失败");
+//                        DsncLog.e("Service百度地图定位结果", "失败");
                         break;
                 }
                 //获取经度
                 longtitude = bdLocation.getLongitude();
                 //获取纬度
                 latitude = bdLocation.getLatitude();
-//                DsncLog.e("longtitude经度:", longtitude + "");
-//                DsncLog.e("latitude纬度:", latitude + "");
                 PreferenceUtil.setPreString("longtitude",longtitude+"");
                 PreferenceUtil.setPreString("latitude",latitude+"");
             }

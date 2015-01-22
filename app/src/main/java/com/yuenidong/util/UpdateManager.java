@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 
 import com.yuenidong.activity.R;
 import com.yuenidong.app.DsncLog;
+import com.yuenidong.common.AppData;
 import com.yuenidong.constants.YueNiDongConstants;
 
 import java.io.File;
@@ -21,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 /**
  * Created by 石岩 on 2015/1/5.
@@ -34,7 +36,9 @@ public class UpdateManager {
 
     //返回的安装包url
 //    private String apkUrl = "http://softfile.3g.qq.com:8080/msoft/179/24659/43549/qq_hd_mini_1.4.apk";
-    private String apkUrl = YueNiDongConstants.UPDATE_VERSIONCODE;
+    private String apkUrl = YueNiDongConstants.BASE_URL + "/user/down?fileName=qq_hd_mini_1.4.apk";
+//    private String apkUrl = YueNiDongConstants.BASE_URL+"/user/down"+UrlUtil.decodeUrl();
+//    private String apkUrl = YueNiDongConstants.UPDATE_VERSIONCODE;
 
 
     private Dialog noticeDialog;
@@ -59,7 +63,7 @@ public class UpdateManager {
 
     private boolean interceptFlag = false;
 
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case DOWN_UPDATE:
@@ -72,7 +76,9 @@ public class UpdateManager {
                 default:
                     break;
             }
-        };
+        }
+
+        ;
     };
 
     public UpdateManager(Context context) {
@@ -80,12 +86,12 @@ public class UpdateManager {
     }
 
     //外部接口让主Activity调用
-    public void checkUpdateInfo(){
+    public void checkUpdateInfo() {
         showNoticeDialog();
     }
 
 
-    private void showNoticeDialog(){
+    private void showNoticeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("软件版本更新");
         builder.setMessage(updateMsg);
@@ -106,13 +112,13 @@ public class UpdateManager {
         noticeDialog.show();
     }
 
-    private void showDownloadDialog(){
+    private void showDownloadDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("软件版本更新");
 
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         View v = inflater.inflate(R.layout.progress, null);
-        mProgress = (ProgressBar)v.findViewById(R.id.progress);
+        mProgress = (ProgressBar) v.findViewById(R.id.progress);
 
         builder.setView(v);
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -132,16 +138,19 @@ public class UpdateManager {
         @Override
         public void run() {
             try {
+//                HashMap<String, String> map = new HashMap<String, String>();
+//                map.put("fileName", "qq_hd_mini_1.4.apk");
                 URL url = new URL(apkUrl);
-
-                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.connect();
-                int length = conn.getContentLength();
-                DsncLog.e("length",length+"shiyan");
+                int code = conn.getResponseCode();
+                String message = conn.getResponseMessage();
+                DsncLog.e("code", code + "shiyan");
+                DsncLog.e("message", message + "   121212");
+                int length = getFileSizeAtUrl(url);
                 InputStream is = conn.getInputStream();
-
                 File file = new File(savePath);
-                if(!file.exists()){
+                if (!file.exists()) {
                     file.mkdir();
                 }
                 String apkFile = saveFileName;
@@ -151,23 +160,23 @@ public class UpdateManager {
                 int count = 0;
                 byte buf[] = new byte[1024];
 
-                do{
+                do {
                     int numread = is.read(buf);
                     count += numread;
-                    progress =(int)(((float)count / length) * 100);
+                    progress = (int) (((float) count / length) * 100);
                     //更新进度
                     mHandler.sendEmptyMessage(DOWN_UPDATE);
-                    if(numread <= 0){
+                    if (numread <= 0) {
                         //下载完成通知安装
                         mHandler.sendEmptyMessage(DOWN_OVER);
                         break;
                     }
-                    fos.write(buf,0,numread);
-                }while(!interceptFlag);//点击取消就停止下载.
+                    fos.write(buf, 0, numread);
+                } while (!interceptFlag);//点击取消就停止下载.
 
                 fos.close();
                 is.close();
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -176,26 +185,45 @@ public class UpdateManager {
 
     /**
      * 下载apk
+     *
      * @param url
      */
 
-    private void downloadApk(){
+    private void downloadApk() {
         downLoadThread = new Thread(mdownApkRunnable);
         downLoadThread.start();
     }
+
     /**
      * 安装apk
+     *
      * @param url
      */
-    private void installApk(){
+    private void installApk() {
         File apkfile = new File(saveFileName);
         if (!apkfile.exists()) {
             return;
         }
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setDataAndType(Uri.parse("file://" + apkfile.toString()), "application/vnd.android.package-archive");
-        mContext.startActivity(i);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        AppData.getContext().startActivity(i);
 
+    }
+
+    /**
+     * 获取给定URL的文件大小
+     *
+     * @param url 给定的URL
+     *            [url=home.php?mod=space&uid=7300]@return[/url] 文件大小
+     */
+    public int getFileSizeAtUrl(URL url) throws Exception {
+        int filesize = -1;
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestProperty("Accept-Encoding", "identity");
+        filesize = conn.getContentLength();
+        conn.disconnect();
+        return filesize;
     }
 }
 

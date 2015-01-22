@@ -107,6 +107,20 @@ public class MatchInfoFragment extends Fragment implements LoadListView.ILoadLis
     TextView tv_praise;
     @InjectView(R.id.tv_comment)
     TextView tv_comment;
+    @InjectView(R.id.iv_one)
+    ImageView iv_one;
+    @InjectView(R.id.iv_two)
+    ImageView iv_two;
+    @InjectView(R.id.iv_three)
+    ImageView iv_three;
+    @InjectView(R.id.iv_four)
+    ImageView iv_four;
+    @InjectView(R.id.iv_five)
+    ImageView iv_five;
+    @InjectView(R.id.iv_six)
+    ImageView iv_six;
+
+    private List<ImageView> listImageView = new ArrayList<ImageView>();
 
 
     //参加活动
@@ -320,6 +334,12 @@ public class MatchInfoFragment extends Fragment implements LoadListView.ILoadLis
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_match_info, container, false);
         ButterKnife.inject(this, view);
+        listImageView.add(iv_one);
+        listImageView.add(iv_two);
+        listImageView.add(iv_three);
+        listImageView.add(iv_four);
+        listImageView.add(iv_five);
+        listImageView.add(iv_six);
         list = new ArrayList<MatchInfoCommentEntity>();
         adapter = new MatchInfoCommentAdapter(getActivity(), list);
         listView.setAdapter(adapter);
@@ -411,6 +431,59 @@ public class MatchInfoFragment extends Fragment implements LoadListView.ILoadLis
             }
         });
 
+        //----------------------------------------------最近来过------------------------------------
+        final HashMap<String, String> map = new HashMap<String, String>();
+        map.put("userId", PreferenceUtil.getPreString("userId", ""));
+        map.put("activityId", entity.getActivityId());
+        map.put("pageNum", "1");
+        map.put("count", "6");
+        JSONObject jsonObject = null;
+        try {
+            String str = CommonUtils.hashMapToJson(map);
+            jsonObject = new JSONObject(str);
+            DsncLog.e("jsonObject", jsonObject.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JsonRequest<JSONObject> jsonRequest = new JsonObjectRequest(
+                Request.Method.POST, YueNiDongConstants.RECENTCOME, jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("活动最近来过success", response.toString());
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("json");
+                            if (jsonArray.length() > 0) {
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                    String img = jsonObject.getString("userImg");
+                                    listImageView.get(i).setVisibility(View.VISIBLE);
+                                    loadImageVolley(img, listImageView.get(i));
+                                }
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.toString());
+            }
+        }) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Accept", "application/json");
+                headers.put("Content-Type", "application/json; charset=UTF-8");
+                return headers;
+            }
+        };
+        RequestManager.addRequest(jsonRequest, this);
 
         return view;
     }
@@ -560,7 +633,6 @@ public class MatchInfoFragment extends Fragment implements LoadListView.ILoadLis
                     }
                 };
                 RequestManager.addRequest(jsonRequest, this);
-
             }
         }, 2000);
     }

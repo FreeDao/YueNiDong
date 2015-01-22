@@ -9,82 +9,89 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 
 import com.yuenidong.activity.R;
+import com.yuenidong.app.DsncLog;
 
 public class LoadListView extends ListView implements OnScrollListener {
-	// 底部布局
-	View footer;
-	// 总数量
-	int totalItemCount;
-	// 最后一个可见的item
-	int lastVisibleItem;
-	// 正在加载
-	boolean isLoading;
-	
-	ILoadListener iLoadListener;
+    // 底部布局
+    View footer;
+    // 总数量
+    int totalItemCount;
+    // 最后一个可见的item
+    int lastVisibleItem;
+    // 正在加载
+    boolean isLoading;
 
-	public LoadListView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		initView(context);
-	}
+    ILoadListener iLoadListener;
 
-	public LoadListView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		initView(context);
-	}
+    public LoadListView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        initView(context);
+    }
 
-	public LoadListView(Context context) {
-		super(context);
-		initView(context);
-	}
+    public LoadListView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        initView(context);
+    }
 
-	/**
-	 * 添加底部加载提示布局到listview
-	 */
-	private void initView(Context context) {
-		LayoutInflater inflater = LayoutInflater.from(context);
-		footer = inflater.inflate(R.layout.listview_footer, null);
-		this.addFooterView(footer);
-		footer.findViewById(R.id.layout_load).setVisibility(View.GONE);
-		this.setOnScrollListener(this);
-	}
+    public LoadListView(Context context) {
+        super(context);
+        initView(context);
+    }
 
-	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem,
-			int visibleItemCount, int totalItemCount) {
-		this.lastVisibleItem = firstVisibleItem + visibleItemCount;
-		this.totalItemCount = totalItemCount;
+    /**
+     * 添加底部加载提示布局到listview
+     */
+    private void initView(Context context) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        footer = inflater.inflate(R.layout.listview_footer, null);
+        this.addFooterView(footer);
+        footer.findViewById(R.id.layout_load).setVisibility(View.GONE);
+        this.setOnScrollListener(this);
+    }
 
-	}
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem,
+                         int visibleItemCount, int totalItemCount) {
+        this.lastVisibleItem = firstVisibleItem + visibleItemCount;
+        this.totalItemCount = totalItemCount;
+        DsncLog.e("firstVisibleItem", firstVisibleItem + "");
+        DsncLog.e("visibleItemCount", visibleItemCount + "");
+        DsncLog.e("totalItemCount", totalItemCount + "");
 
-	@Override
-	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		if (lastVisibleItem == totalItemCount
-				&& scrollState == SCROLL_STATE_IDLE) {
-			if (!isLoading) {
-				isLoading = true;
-				footer.findViewById(R.id.layout_load).setVisibility(
-						View.VISIBLE);
-				// 加载更多数据
-				iLoadListener.onLoad();
-			}
 
-		}
-	}
-	/**
-	 * 加载完毕
-	 */
-	public void loadComplete(){
-		isLoading=false;
-		footer.findViewById(R.id.layout_load).setVisibility(
-				View.GONE);
-	}
-	
-	public void setInterface(ILoadListener iLoadListener){
-		this.iLoadListener=iLoadListener;
-	}
-	//加载更多数据的回调接口
-	public interface ILoadListener{
-		public void onLoad();
-	}
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        if (lastVisibleItem == totalItemCount
+                && scrollState == SCROLL_STATE_IDLE && totalItemCount > 0 && totalItemCount % 10 == 0) {
+            if (!isLoading) {
+                isLoading = true;
+                footer.findViewById(R.id.layout_load).setVisibility(
+                        View.VISIBLE);
+                // 加载更多数据
+                iLoadListener.onLoad();
+            }
+
+        }
+    }
+
+    /**
+     * 加载完毕
+     */
+    public void loadComplete() {
+        isLoading = false;
+        footer.findViewById(R.id.layout_load).setVisibility(
+                View.GONE);
+    }
+
+    public void setInterface(ILoadListener iLoadListener) {
+        this.iLoadListener = iLoadListener;
+    }
+
+    //加载更多数据的回调接口
+    public interface ILoadListener {
+        public void onLoad();
+    }
 
 }

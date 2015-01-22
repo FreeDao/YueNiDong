@@ -31,7 +31,7 @@ import com.yuenidong.activity.PhoneValidationActivity;
 import com.yuenidong.activity.R;
 import com.yuenidong.activity.ResetPasswordActivity;
 import com.yuenidong.activity.SinaOauthActivity;
-import com.yuenidong.activity.WxOauthActivity;
+import com.yuenidong.activity.wxapi.WXEntryActivity;
 import com.yuenidong.app.DsncLog;
 import com.yuenidong.app.RequestManager;
 import com.yuenidong.common.AppData;
@@ -88,7 +88,7 @@ public class LoginFragment extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("success", response.toString());
+                        Log.e("登录success", response.toString());
                         Commvert commvert = new Commvert(response);
                         if (commvert.getString("status").equals("-1")) {
                             Toast.makeText(getActivity(), "用户名或密码错误!", Toast.LENGTH_SHORT).show();
@@ -96,6 +96,8 @@ public class LoginFragment extends Fragment {
                         } else if (!TextUtils.isEmpty(commvert.getString("userId"))) {
                             PreferenceUtil.setPreString("userId", commvert.getString("userId"));
                             PreferenceUtil.setPreBoolean("isFirstLogin", false);
+                            PreferenceUtil.setPreString("userRole", commvert.getString("userRole"));
+                            PreferenceUtil.setPreString("imId", commvert.getString("imId"));
                             Intent intent = new Intent(getActivity(), MainActivity.class);
                             startActivity(intent);
                         }
@@ -123,7 +125,7 @@ public class LoginFragment extends Fragment {
     //微信注册
     @OnClick(R.id.btn_weixin)
     void login_weixin() {
-        Intent intent = new Intent(getActivity(), WxOauthActivity.class);
+        Intent intent = new Intent(getActivity(), WXEntryActivity.class);
         startActivity(intent);
     }
 

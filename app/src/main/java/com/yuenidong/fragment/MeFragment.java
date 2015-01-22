@@ -117,6 +117,7 @@ public class MeFragment extends Fragment {
     @OnClick(R.id.btn_mymatch)
     void match() {
         Intent intent = new Intent(getActivity(), MyMatchActivity.class);
+        intent.putExtra("userId",PreferenceUtil.getPreString("userId",""));
         startActivity(intent);
     }
 
@@ -144,9 +145,9 @@ public class MeFragment extends Fragment {
     //我的标签
     @OnClick(R.id.rl_four)
     void label() {
+        Toast.makeText(getActivity(),"一点击",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getActivity(), ChooseLabelActivity.class);
         Bundle bundle=new Bundle();
-        DsncLog.e("我的标签","我的标签");
         bundle.putSerializable("user",user);
         intent.putExtras(bundle);
         startActivity(intent);
@@ -212,7 +213,7 @@ public class MeFragment extends Fragment {
                             Image_path = response.getString("userImg");
                             userName = response.getString("userName");
                             gender = response.getString("gender");
-                            ID = response.getString("id");
+                            ID = response.getString("yndId");
                             label1 = commvert.getString("label0");
                             label2 = commvert.getString("label1");
                             label3 = commvert.getString("label2");
@@ -340,6 +341,13 @@ public class MeFragment extends Fragment {
         if (label1.equals("轮滑")) {
             iv.setImageResource(R.drawable.label_skidding_filled);
         }
+        if(label1.equals("教练")){
+            iv.setImageResource(R.drawable.ic_coach_filled);
+        }
+        if(label1.equals("助教")){
+            iv.setImageResource(R.drawable.ic_teacher_filled);
+        }
+
     }
 
 

@@ -30,7 +30,6 @@ public class CircleImageView extends ImageView {
 
     private final RectF mDrawableRect = new RectF();
     private final RectF mBorderRect = new RectF();
-
     private final Matrix mShaderMatrix = new Matrix();
     private final Paint mBitmapPaint = new Paint();
     private final Paint mBorderPaint = new Paint();

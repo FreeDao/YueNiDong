@@ -40,6 +40,7 @@ import com.yuenidong.constants.YueNiDongConstants;
 import com.yuenidong.util.CommonUtils;
 import com.yuenidong.util.Commvert;
 import com.yuenidong.util.TimeUtils;
+import com.yuenidong.widget.CircleImageView;
 
 import org.json.JSONObject;
 
@@ -124,7 +125,7 @@ public class MatchAdapter extends BaseAdapter {
             holder.iv_type = (ImageView) convertView.findViewById(R.id.iv_type);
             holder.tv_title = (TextView) convertView.findViewById(R.id.tv_title);
             holder.tv_coin_count = (TextView) convertView.findViewById(R.id.tv_coin_count);
-            holder.iv_image = (ImageView) convertView.findViewById(R.id.iv_image);
+            holder.iv_image = (CircleImageView) convertView.findViewById(R.id.iv_image);
             holder.tv_name = (TextView) convertView.findViewById(R.id.tv_name);
             holder.iv_sex = (ImageView) convertView.findViewById(R.id.iv_sex);
             holder.tv_place = (TextView) convertView.findViewById(R.id.tv_place);
@@ -213,6 +214,8 @@ public class MatchAdapter extends BaseAdapter {
         });
         return convertView;
     }
+
+
 }
 
 
@@ -224,7 +227,7 @@ class ViewHolder {
     //果冻数量
     TextView tv_coin_count;
     //活动发起人的头像
-    ImageView iv_image;
+    CircleImageView iv_image;
     //活动发起人的姓名
     TextView tv_name;
     //活动发起人的性别

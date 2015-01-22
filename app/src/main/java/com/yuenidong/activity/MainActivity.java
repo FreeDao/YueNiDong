@@ -125,7 +125,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public static final String PACKAGENAME = "com.yuenidong.activity";
     GotyeAPI api;
     String name = "wusong";
-    String password = "wusong";
     int code;
     private TextView msgTip;
 
@@ -182,7 +181,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         //初始化个推推送
         PushManager.getInstance().initialize(this.getApplicationContext());
         AppManager.getAppManager().addActivity(MainActivity.this);
-        NetWorkState.with().addObserver(this);
+//        NetWorkState.with().addObserver(this);
         findViews();
         if (getIntent().getBooleanExtra("isDirect", false)) {
             btn_login.setVisibility(View.VISIBLE);
@@ -197,9 +196,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         refreshTab(MAP_SELECTED);
         changeContentFragment(MAP_TAG);
 //        setStatusBarColor();
-        if (!isGPSOpen()) {
-            showOpenGPS();
-        }
+//        if (!isGPSOpen()) {
+//            showOpenGPS();
+//        }
 
         //--------亲加-------------
         api = GotyeAPI.getInstance();
@@ -208,7 +207,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         GotyeAPI.getInstance().addListerer(MainActivity.this);
         boolean isLogin = api.isOnline();
         DsncLog.e("login", isLogin + "");
-        code = api.login(name, password);
+        if(!TextUtils.isEmpty(PreferenceUtil.getPreString("imId",""))) {
+            code = api.login(PreferenceUtil.getPreString("imId",""), null);
+            DsncLog.e("imId",PreferenceUtil.getPreString("imId",""));
+        }
         DsncLog.e("code", code + "");
 //        beep = new BeepManager(MainActivity.this);
 //        beep.updatePrefs();
@@ -218,7 +220,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         msgTip = (TextView) findViewById(R.id.msgTip);
         if (!TextUtils.isEmpty(PreferenceUtil.getPreString("unreadCount", ""))) {
             msgTip.setVisibility(View.VISIBLE);
-            DsncLog.e("msgTip", PreferenceUtil.getPreString("unreadCount", ""));
+//            DsncLog.e("msgTip", PreferenceUtil.getPreString("unreadCount", ""));
             msgTip.setText(PreferenceUtil.getPreString("unreadCount", ""));
         }
 
@@ -532,14 +534,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     @TargetApi(19)
     protected void setStatusBarColor() {
-        if(Build.MANUFACTURER.equalsIgnoreCase("meizu")){
+        if (Build.MANUFACTURER.equalsIgnoreCase("meizu")) {
             return;
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window=getWindow();
-            WindowManager.LayoutParams params=window.getAttributes();
-            params.flags|= WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+            Window window = getWindow();
+            WindowManager.LayoutParams params = window.getAttributes();
+            params.flags |= WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
             window.setAttributes(params);
             // create our manager instance after the content view is set
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
@@ -559,10 +561,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     protected void onDestroy() {
         super.onDestroy();
         // 退出登录
-        if (!TextUtils.isEmpty(code + "")) {
-            onLogout(code);
-        }
-        api.removeListener(this);
+//        if (!TextUtils.isEmpty(code + "")) {
+//            onLogout(code);
+//        }
+//        api.removeListener(this);
 
     }
 

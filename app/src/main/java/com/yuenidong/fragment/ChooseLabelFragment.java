@@ -93,7 +93,7 @@ public class ChooseLabelFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            user= (MyUserEntity) getArguments().getSerializable("user");
+            user = (MyUserEntity) getArguments().getSerializable("user");
         }
     }
 
@@ -171,12 +171,12 @@ public class ChooseLabelFragment extends Fragment {
         PreferenceUtil.setPreString("label_one", user.getLabel1());
         PreferenceUtil.setPreString("label_two", user.getLabel2());
         PreferenceUtil.setPreString("label_three", user.getLabel3());
-        DsncLog.e("llllll",user.getLabel1());
-        DsncLog.e("llllll",PreferenceUtil.getPreString("label_one",""));
-        DsncLog.e("222222",user.getLabel2());
-        DsncLog.e("222222",PreferenceUtil.getPreString("label_two",""));
-        DsncLog.e("333333",user.getLabel3());
-        DsncLog.e("333333",PreferenceUtil.getPreString("label_three",""));
+        DsncLog.e("llllll", user.getLabel1());
+        DsncLog.e("llllll", PreferenceUtil.getPreString("label_one", ""));
+        DsncLog.e("222222", user.getLabel2());
+        DsncLog.e("222222", PreferenceUtil.getPreString("label_two", ""));
+        DsncLog.e("333333", user.getLabel3());
+        DsncLog.e("333333", PreferenceUtil.getPreString("label_three", ""));
 
         YueNiDongConstants.count = 0;
         //获取手机屏幕宽度和高度
@@ -192,10 +192,6 @@ public class ChooseLabelFragment extends Fragment {
 
         int screenWidthDp = CommonUtils.px2dip(getActivity(), screenWidth);
         int screenHeightDp = CommonUtils.px2dip(getActivity(), screenHeight);
-        DsncLog.e("screenWidth", screenWidth + "");
-        DsncLog.e("screenHeight", screenHeight + "");
-        DsncLog.e("screenWidthDp", screenWidthDp + "");
-        DsncLog.e("screenHeightDp", screenHeightDp + "");
 
 
         list_one = new ArrayList<Integer>();
@@ -206,10 +202,9 @@ public class ChooseLabelFragment extends Fragment {
         for (int i = 0; i < imgs2.length; i++) {
             list_two.add(imgs2[i]);
         }
-
         GridOneAdapter adapter = new GridOneAdapter(getActivity(), list_one);
         gridView_one.setAdapter(adapter);
-        GridTwoAdapter adaptertwo = new GridTwoAdapter(getActivity(), list_two, screenWidth, screenHeight);
+        GridTwoAdapter adaptertwo = new GridTwoAdapter(getActivity(), list_two, screenWidth, screenHeight,user);
         gridView_two.setAdapter(adaptertwo);
         return view;
     }

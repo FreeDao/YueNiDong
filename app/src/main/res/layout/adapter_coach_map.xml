@@ -63,6 +63,7 @@
                         android:src="@drawable/ic_woman" />
 
                     <TextView
+                        android:id="@+id/tv_distance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -76,7 +77,7 @@
 
                 <!--第三层-->
                 <TextView
-                    android:id="@+id/tv_one"
+                    android:id="@+id/tv_sign"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -90,7 +91,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_above="@id/tv_one"
+                    android:layout_above="@id/tv_sign"
                     android:layout_below="@id/rl_one">
 
                     <ImageView
@@ -115,35 +116,40 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="16dp"
-                        android:background="@drawable/ic_star" />
+                        android:background="@drawable/ic_star"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@id/iv_one"
-                        android:background="@drawable/ic_star" />
+                        android:background="@drawable/ic_star"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_three"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@id/iv_two"
-                        android:background="@drawable/ic_star" />
+                        android:background="@drawable/ic_star"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_four"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@id/iv_three"
-                        android:background="@drawable/ic_star" />
+                        android:background="@drawable/ic_star"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_five"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@id/iv_four"
-                        android:background="@drawable/ic_star" />
+                        android:background="@drawable/ic_star"
+                        android:visibility="gone" />
                 </RelativeLayout>
 
             </RelativeLayout>

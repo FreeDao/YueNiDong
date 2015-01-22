@@ -82,7 +82,7 @@
                         android:textSize="13dp" />
 
                     <TextView
-                        android:id="@+id/tv_one"
+                        android:id="@+id/tv_location"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"

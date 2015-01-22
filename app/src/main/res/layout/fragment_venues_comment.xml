@@ -37,7 +37,8 @@
                 android:layout_height="13dp"
                 android:layout_alignLeft="@id/tv_venues_name"
                 android:layout_below="@id/tv_venues_name"
-                android:background="@drawable/ic_star" />
+                android:background="@drawable/ic_star"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/iv_venues_two"
@@ -46,7 +47,8 @@
                 android:layout_alignTop="@id/iv_venues_one"
                 android:layout_below="@id/tv_venues_name"
                 android:layout_toRightOf="@id/iv_venues_one"
-                android:background="@drawable/ic_star" />
+                android:background="@drawable/ic_star"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/iv_venues_three"
@@ -55,7 +57,8 @@
                 android:layout_alignTop="@id/iv_venues_one"
                 android:layout_below="@id/tv_venues_name"
                 android:layout_toRightOf="@id/iv_venues_two"
-                android:background="@drawable/ic_star" />
+                android:background="@drawable/ic_star"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/iv_venues_four"
@@ -64,7 +67,8 @@
                 android:layout_alignTop="@id/iv_venues_one"
                 android:layout_below="@id/tv_venues_name"
                 android:layout_toRightOf="@id/iv_venues_three"
-                android:background="@drawable/ic_star" />
+                android:background="@drawable/ic_star"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/iv_venues_five"
@@ -73,11 +77,13 @@
                 android:layout_alignTop="@id/iv_venues_one"
                 android:layout_below="@id/tv_venues_name"
                 android:layout_toRightOf="@id/iv_venues_four"
-                android:background="@drawable/ic_star" />
+                android:background="@drawable/ic_star"
+                android:visibility="gone" />
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_point"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/ll_ratingbar"
@@ -88,6 +94,7 @@
             android:textSize="12dp" />
 
         <TextView
+            android:id="@+id/tv_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -97,20 +104,85 @@
             android:textColor="@color/orange"
             android:textSize="12dp" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_comerecent"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/rl_venues_info"
+        android:background="@color/white">
+
         <View
             android:layout_width="fill_parent"
             android:layout_height="0.5dp"
             android:layout_alignParentBottom="true"
             android:background="@color/grayblack"></View>
+
+        <TextView
+            android:id="@+id/tv_comerecent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/comerecent"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <com.yuenidong.widget.CircleImageView
+            android:id="@+id/iv_one"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/tv_comerecent"
+            android:src="@drawable/ic_image" />
+
+        <com.yuenidong.widget.CircleImageView
+            android:id="@+id/iv_two"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/iv_one"
+            android:src="@drawable/ic_image" />
+
+        <com.yuenidong.widget.CircleImageView
+            android:id="@+id/iv_three"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/iv_two"
+            android:src="@drawable/ic_image" />
+
+        <com.yuenidong.widget.CircleImageView
+            android:id="@+id/iv_four"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/iv_three"
+            android:src="@drawable/ic_image" />
+
+        <com.yuenidong.widget.CircleImageView
+            android:id="@+id/iv_five"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/iv_four"
+            android:src="@drawable/ic_image" />
+
     </RelativeLayout>
 
-    <ListView
+
+    <com.yuenidong.widget.LoadListView
         android:id="@+id/listView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/rl_venues_info"
+        android:layout_below="@id/rl_comerecent"
         android:cacheColorHint="#ffffff"
-        android:divider="@null"></ListView>
-
+        android:divider="@null" />
 
 </RelativeLayout>
