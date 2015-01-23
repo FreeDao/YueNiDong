@@ -20,27 +20,28 @@ import butterknife.OnClick;
 public class CoachCommentActivity extends BaseActivity {
     @InjectView(R.id.actionbar_rightbutton)
     Button actionbar_rightbutton;
-
+    String coachId;
 
     //教练评价
     @OnClick(R.id.actionbar_rightbutton)
     void comment() {
         Intent intent = new Intent(this, CoachAddCommentActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("coachId",coachId);
         AppData.getContext().startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+         coachId=getIntent().getStringExtra("coachId");
         showActionBarText(AppData.getString(R.string.coachcomment));
         showActionBarRightButton();
         actionbar_rightbutton.setBackgroundResource(R.drawable.button_add_venues);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = CoachCommentFragment.newInstance();
+        Fragment fragment = CoachCommentFragment.newInstance(coachId);
         fragmentTransaction.replace(R.id.layout_container, fragment);
         fragmentTransaction.commit();
 

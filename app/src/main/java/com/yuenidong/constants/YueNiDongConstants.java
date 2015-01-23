@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class YueNiDongConstants {
     public static int count = 0;
     //    public static final String BASE_URL = "http://app.yuenidong.com/rrydBack1.1";
-    public static final String BASE_URL = "http://192.168.20.103:8080/rrydBack1.1";
+    public static final String BASE_URL = "http://192.168.20.105:8080/rrydBack1.1";
     //注册
     public static final String REGISTER_URL = BASE_URL + "/user/registerUser";
     //登录
@@ -73,4 +73,13 @@ public class YueNiDongConstants {
     public static final String ADDVENUESCOMMENT = BASE_URL + "/remark/addVeRemark";
     //获取所有伙伴
     public static final String GETALLFRIEND = BASE_URL + "/user/getAllUser";
+    //添加教练评价
+    public static final String ADDCOACHCOMMENT = BASE_URL + "/remark/addCoachRemark";
+    //获取场馆最近来过的人
+    public static final String GETVENUESRECENTCOME = BASE_URL + "/vender/getVenderVisitor";
+    //获取收藏场馆
+    public static final String GETVENUESCOLLECTION = BASE_URL + "/vender/getCollectVender";
+    //获取教练评价
+    public static final String GETCOACHCOMMENT = BASE_URL + "/remark/checkCoachRemark";
+
 }

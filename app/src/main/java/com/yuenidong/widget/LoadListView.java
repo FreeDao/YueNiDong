@@ -54,9 +54,9 @@ public class LoadListView extends ListView implements OnScrollListener {
                          int visibleItemCount, int totalItemCount) {
         this.lastVisibleItem = firstVisibleItem + visibleItemCount;
         this.totalItemCount = totalItemCount;
-        DsncLog.e("firstVisibleItem", firstVisibleItem + "");
-        DsncLog.e("visibleItemCount", visibleItemCount + "");
-        DsncLog.e("totalItemCount", totalItemCount + "");
+//        DsncLog.e("firstVisibleItem", firstVisibleItem + "");
+//        DsncLog.e("visibleItemCount", visibleItemCount + "");
+//        DsncLog.e("totalItemCount", totalItemCount + "");
 
 
     }

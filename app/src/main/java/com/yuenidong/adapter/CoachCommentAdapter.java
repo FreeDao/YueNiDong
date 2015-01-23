@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import com.yuenidong.activity.R;
 import com.yuenidong.bean.CoachCommentEntity;
 import com.yuenidong.bean.CoachEntity;
+import com.yuenidong.bean.FriendEntity;
+import com.yuenidong.bean.VenuesCommentEntity;
 
 import java.util.List;
 
@@ -18,10 +20,10 @@ import java.util.List;
  */
 public class CoachCommentAdapter extends BaseAdapter {
     private Context context;
-    private List<CoachCommentEntity> list;
+    private List<VenuesCommentEntity> list;
     private LayoutInflater inflater;
 
-    public CoachCommentAdapter(Context context, List<CoachCommentEntity> list) {
+    public CoachCommentAdapter(Context context, List<VenuesCommentEntity> list) {
         this.context = context;
         this.list = list;
         this.inflater = LayoutInflater.from(context);

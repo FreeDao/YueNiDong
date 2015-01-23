@@ -69,7 +69,7 @@ public class FriendAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolderFriend) convertView.getTag();
         }
-        loadImageVolley(list.get(i).getUserImg(),holder.iv_image);
+        loadImageVolley(list.get(i).getUserImg(), holder.iv_image);
         holder.tv_name.setText(list.get(i).getUserName());
         if (list.get(i).getGender().equals("m")) {
             holder.iv_sex.setImageResource(R.drawable.ic_man);
@@ -101,7 +101,7 @@ public class FriendAdapter extends BaseAdapter {
         } else {
             holder.iv_label_three.setVisibility(View.GONE);
         }
-        holder.tv_distance.setText(list.get(i).getDistance()+"km");
+        holder.tv_distance.setText(list.get(i).getDistance() + "km");
         holder.tv_sign.setText(list.get(i).getSignature());
         return convertView;
     }
@@ -177,6 +177,7 @@ public class FriendAdapter extends BaseAdapter {
         imageLoader.get(imageurl, listener);
     }
 }
+
 class ViewHolderFriend {
     //球友头像
     ImageView iv_image;

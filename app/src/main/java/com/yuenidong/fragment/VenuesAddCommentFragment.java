@@ -29,6 +29,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.yuenidong.activity.MainActivity;
 import com.yuenidong.activity.R;
+import com.yuenidong.activity.VenuesCommentActivity;
 import com.yuenidong.app.DsncLog;
 import com.yuenidong.app.RequestManager;
 import com.yuenidong.bean.VenuesCommentEntity;
@@ -61,7 +62,7 @@ public class VenuesAddCommentFragment extends Fragment {
     Button btn_addsure;
 
     @OnClick(R.id.btn_addsure)
-    void add(){
+    void add() {
         //------------------------------场馆评价--------------------------------
         content = et_comment.getText().toString().trim();
         final HashMap<String, String> map = new HashMap<String, String>();
@@ -78,12 +79,12 @@ public class VenuesAddCommentFragment extends Fragment {
             e.printStackTrace();
         }
         JsonRequest<JSONObject> jsonRequest = new JsonObjectRequest(
-                Request.Method.POST, YueNiDongConstants.LOGIN, jsonObject,
+                Request.Method.POST, YueNiDongConstants.ADDVENUESCOMMENT, jsonObject,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.e("提交场馆评价success", response.toString());
-
+                        getActivity().finish();
                     }
                 }, new Response.ErrorListener() {
             @Override

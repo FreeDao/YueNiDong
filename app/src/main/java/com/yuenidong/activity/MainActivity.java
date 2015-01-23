@@ -207,9 +207,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         GotyeAPI.getInstance().addListerer(MainActivity.this);
         boolean isLogin = api.isOnline();
         DsncLog.e("login", isLogin + "");
-        if(!TextUtils.isEmpty(PreferenceUtil.getPreString("imId",""))) {
-            code = api.login(PreferenceUtil.getPreString("imId",""), null);
-            DsncLog.e("imId",PreferenceUtil.getPreString("imId",""));
+        if (!TextUtils.isEmpty(PreferenceUtil.getPreString("imId", ""))) {
+            code = api.login(PreferenceUtil.getPreString("imId", ""), null);
+            DsncLog.e("imId", PreferenceUtil.getPreString("imId", ""));
         }
         DsncLog.e("code", code + "");
 //        beep = new BeepManager(MainActivity.this);

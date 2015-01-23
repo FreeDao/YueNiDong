@@ -123,6 +123,7 @@ public class CoachInfoFragment extends Fragment {
     @OnClick(R.id.btn_come)
     void come() {
         Intent intent = new Intent(getActivity(), ComeRecentActivity.class);
+        intent.putExtra("coachId", entity.getUserId());
         startActivity(intent);
     }
 
@@ -130,6 +131,7 @@ public class CoachInfoFragment extends Fragment {
     @OnClick(R.id.btn_coachcomment)
     void comment() {
         Intent intent = new Intent(getActivity(), CoachCommentActivity.class);
+        intent.putExtra("coachId", entity.getUserId());
         startActivity(intent);
     }
 
@@ -215,23 +217,23 @@ public class CoachInfoFragment extends Fragment {
                                     switch (i) {
                                         case 0:
                                             iv_image_one.setVisibility(View.VISIBLE);
-                                            loadImageVolley(url,iv_image_one);
+                                            loadImageVolley(url, iv_image_one);
                                             break;
                                         case 1:
                                             iv_image_two.setVisibility(View.VISIBLE);
-                                            loadImageVolley(url,iv_image_two);
+                                            loadImageVolley(url, iv_image_two);
                                             break;
                                         case 2:
                                             iv_image_three.setVisibility(View.VISIBLE);
-                                            loadImageVolley(url,iv_image_three);
+                                            loadImageVolley(url, iv_image_three);
                                             break;
                                         case 3:
                                             iv_image_four.setVisibility(View.VISIBLE);
-                                            loadImageVolley(url,iv_image_four);
+                                            loadImageVolley(url, iv_image_four);
                                             break;
                                         case 4:
                                             iv_image_five.setVisibility(View.VISIBLE);
-                                            loadImageVolley(url,iv_image_five);
+                                            loadImageVolley(url, iv_image_five);
                                             break;
                                     }
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -90,9 +91,17 @@ public class VenuesCommentFragment extends Fragment implements LoadListView.ILoa
         // Required empty public constructor
     }
 
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        DsncLog.e("onActivityCreated", "onActivityCreated");
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DsncLog.e("onCreate", "onCreate");
         if (getArguments() != null) {
             entity = (VenuesEntity) getArguments().getSerializable("user");
         }
@@ -101,6 +110,7 @@ public class VenuesCommentFragment extends Fragment implements LoadListView.ILoa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        DsncLog.e("onCreateView", "onCreateView");
         View view = inflater.inflate(R.layout.fragment_venues_comment, container, false);
         ButterKnife.inject(this, view);
         list = new ArrayList<VenuesCommentEntity>();
@@ -135,6 +145,44 @@ public class VenuesCommentFragment extends Fragment implements LoadListView.ILoa
         }
         tv_point.setText(entity.getPoint() + "总评分");
         tv_commnet.setText(entity.getRemarkCount() + "条评价");
+        //-----------------------获取场馆最近来过的人-----------------------------------
+        final HashMap<String, String> map2 = new HashMap<String, String>();
+        map2.put("venderId", entity.getVenderId());
+        map2.put("pageNum", "1");
+        map2.put("count", "5");
+        map2.put("userId", PreferenceUtil.getPreString("userId", ""));
+        JSONObject jsonObject2 = null;
+        try {
+            String str = CommonUtils.hashMapToJson(map2);
+            jsonObject2 = new JSONObject(str);
+            DsncLog.e("jsonObject", jsonObject2.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JsonRequest<JSONObject> jsonRequest2 = new JsonObjectRequest(
+                Request.Method.POST, YueNiDongConstants.GETVENUESRECENTCOME, jsonObject2,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("获取场馆最近来过的人success", response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.toString());
+            }
+        }) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Accept", "application/json");
+                headers.put("Content-Type", "application/json; charset=UTF-8");
+                return headers;
+            }
+        };
+        RequestManager.addRequest(jsonRequest2, this);
+
         //-----------------------获取场馆评论----------------------
         final HashMap<String, String> map = new HashMap<String, String>();
         map.put("venderId", entity.getVenderId());
@@ -153,16 +201,21 @@ public class VenuesCommentFragment extends Fragment implements LoadListView.ILoa
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("登录success", response.toString());
-                        Commvert commvert = new Commvert(response);
+                        Log.e("获取场馆评论success", response.toString());
                         JSONArray jsonArray = null;
                         try {
                             jsonArray = response.getJSONArray("json");
                             if (jsonArray.length() > 0) {
                                 Gson gson = new Gson();
-                                Type type = new TypeToken<ArrayList<CoachEntity>>() {
+                                Type type = new TypeToken<ArrayList<VenuesCommentEntity>>() {
                                 }.getType();
-                                list = gson.fromJson(jsonArray.toString(), type);
+                                ArrayList<VenuesCommentEntity> list2=new ArrayList<VenuesCommentEntity>();
+                                list2 = gson.fromJson(jsonArray.toString(), type);
+                                for(int i=0;i<list2.size();i++){
+                                    list.add(list2.get(i));
+                                }
+                                DsncLog.e("123",list.get(0).getContent());
+                                DsncLog.e("123",list.get(0).getUserName());
                                 adapter.notifyDataSetChanged();
                             }
                         } catch (JSONException e) {
@@ -209,14 +262,14 @@ public class VenuesCommentFragment extends Fragment implements LoadListView.ILoa
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("登录success", response.toString());
+                        Log.e("获取场馆评论更多success", response.toString());
                         Commvert commvert = new Commvert(response);
                         JSONArray jsonArray = null;
                         try {
                             jsonArray = response.getJSONArray("json");
                             if (jsonArray.length() > 0) {
                                 Gson gson = new Gson();
-                                Type type = new TypeToken<ArrayList<CoachEntity>>() {
+                                Type type = new TypeToken<ArrayList<VenuesCommentEntity>>() {
                                 }.getType();
                                 list = gson.fromJson(jsonArray.toString(), type);
                                 adapter.notifyDataSetChanged();
@@ -243,5 +296,18 @@ public class VenuesCommentFragment extends Fragment implements LoadListView.ILoa
             }
         };
         RequestManager.addRequest(jsonRequest, this);
+    }
+
+
+    @Override
+    public void onStart() {
+        DsncLog.e("onStart", "onStart");
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        DsncLog.e("onResume", "onResume");
+        super.onResume();
     }
 }

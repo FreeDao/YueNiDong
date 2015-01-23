@@ -17,12 +17,12 @@ public class ComeRecentActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        String coachId=getIntent().getStringExtra("coachId");
         showActionBarText(AppData.getString(R.string.comerecent));
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = ComeRecentFragment.newInstance();
+        Fragment fragment = ComeRecentFragment.newInstance(coachId);
         fragmentTransaction.replace(R.id.layout_container, fragment);
         fragmentTransaction.commit();
 

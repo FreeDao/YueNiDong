@@ -22,14 +22,14 @@ public class CoachAddCommentActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        String coachId=getIntent().getStringExtra("coachId");
         showActionBarText(AppData.getString(R.string.addcomment));
         showActionBarRightButton();
         actionbar_rightbutton.setBackgroundResource(R.drawable.button_share_text);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = CoachAddCommentFragment.newInstance();
+        Fragment fragment = CoachAddCommentFragment.newInstance(coachId);
         fragmentTransaction.replace(R.id.layout_container, fragment);
         fragmentTransaction.commit();
     }
